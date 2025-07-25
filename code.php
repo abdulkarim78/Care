@@ -13,7 +13,6 @@ $conn = new mysqli($servername , $username , $password , $database );
 if ($conn->connect_error) {
   echo("Connection failed: " . $conn->connect_error);
 }
-// echo("Connected successfully"); 
 
 
 //Add Doctor Details
@@ -31,9 +30,10 @@ if(isset($_POST['addDoctorBtn'])){
 
 //Delete Doctor Details
 if(isset($Post['deleteDoctorBtn'])){
-    $id = $_POST['doctorId'];
 
-    $deletePatientQuery = mysqli_query($connection,"delete from doctors where doctorId = '$id'");
+    $id = $_GET['doctorId'];
+
+    $deletePatientQuery = mysqli_query($conn,"DELETE From doctors Where doctorId = '$id'");
 
     if($deleteQuery){
         echo "<script>
@@ -46,10 +46,10 @@ if(isset($Post['deleteDoctorBtn'])){
 // Edit Doctor Details
 if(isset($Post['editDoctorBtn'])){
 
-  $editPatientQuery = "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber'  WHERE doctorId=$id";
-
-  mysqli_query($con, $sql);
+  mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber'  WHERE doctorId=$id");
   
 }
+
+// Add Patient
 
 ?>

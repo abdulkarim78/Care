@@ -177,9 +177,7 @@ if (isset($_POST['submit'])) {
             <div class="box">
                 <img src="./assets/Cardiologist-amico.png" alt="">
                 <h3>Cardiologists</h3>
-                <p>Advanced care for heart and circulatory health.
-
-                </p>
+                <p>Advanced care for heart and circulatory health.</p>
             </div>
         </div>
 
