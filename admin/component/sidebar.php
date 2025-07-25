@@ -1,26 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="sidebar.css">
-</head>
-<body>
+<?php
+// sidebar.php
+?>
 
-    <div class="sidebar" id="sidebar">
-        <h2>Admin Panel</h2>
-        <a href="">Dashboard</a>
-        <a href="">Patient</a>
-        <a href="">Doctor</a>
-        <a href="">Logout</a>
-    </div>
-    <main>
-        <header>
-            <span class="menu-toggle" onclick="toggleSidebar()">&#9776;</span>
-            <h1>Dashboard</h1>
-        </header>
-    </main>
-    
-    <script src="./sidebar.js"></script>
-</body>
-</html>
+<!-- Sidebar Styles & Icons -->
+<link rel="stylesheet" href="./sidebar.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+<!-- Sidebar Structure -->
+<div class="sidebar">
+    <!-- Top navigation links -->
+    <ul class="sidebar--items">
+        <li>
+            <a href="/Care/admin/dashboard.php" id="active--link">
+                <span class="icon icon-1"><i class="ri-layout-grid-line"></i></span>
+                <span class="sidebar--item">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon icon-2"><i class="ri-calendar-2-line"></i></span>
+                <span class="sidebar--item">Schedule</span>
+            </a>
+        </li>
+        <li>
+            <a href="/Care/admin/doctor.php">
+                <span class="icon icon-3"><i class="ri-user-2-line"></i></span>
+                <span class="sidebar--item" style="white-space: nowrap;">Reliable Doctor</span>
+            </a>
+        </li>
+        <li>
+            <a href="/Care/admin/patient.php">
+                <span class="icon icon-4"><i class="ri-user-line"></i></span>
+                <span class="sidebar--item">Patients</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon icon-5"><i class="ri-line-chart-line"></i></span>
+                <span class="sidebar--item">Activity</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Bottom section: settings and logout -->
+    <ul class="sidebar-bottom-items">
+        <li>
+            <a href="#">
+                <span class="icon icon-7"><i class="ri-settings-3-line"></i></span>
+                <span class="sidebar--item">Settings</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
+                <span class="sidebar--item">Logout</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Sidebar Toggle Script -->
+<script src="./sidebar.js"></script>
