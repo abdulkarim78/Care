@@ -29,9 +29,9 @@ if(isset($_POST['addDoctorBtn'])){
 }
 
 //Delete Doctor Details
-if(isset($Post['deleteDoctorBtn'])){
+if(isset($_POST['deleteDoctorBtn'])){
 
-    $id = $_GET['doctorId'];
+    $id = $_POST['doctorId'];
 
     $deletePatientQuery = mysqli_query($conn,"DELETE From doctors Where doctorId = '$id'");
 
