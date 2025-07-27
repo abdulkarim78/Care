@@ -1,17 +1,16 @@
 <?php
 // db Connection
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "care";
 
 // Create connection
-$conn = new mysqli($servername , $username , $password , $database );
+$conn = mysqli_connect($servername, $username, $password, $database);
 
 // Check connection
-if ($conn->connect_error) {
-  echo("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
 
@@ -22,34 +21,40 @@ if(isset($_POST['addDoctorBtn'])){
   $doctorEmail = $_POST['doctorEmail'];
   $doctorGender = $_POST['doctorGender'];
   $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
-
-  $addPatientQuery = "INSERT INTO doctors (doctorName, doctorAge , doctorEmail , doctorGender , doctorPhoneNumber) VALUES ('$doctorName', '$doctorAge', '$doctorEmail' , '$doctorGender' , '$doctorPhoneNumber')";
+  $doctorQualification = $_POST['doctorQualification'];
+  $doctorAvailability = $_POST['doctorAvailability'];
+  
+  $addPatientQuery = "INSERT INTO doctors (doctorName, doctorAge , doctorEmail , doctorGender , doctorPhoneNumber , doctorQualification , doctorAvailability) VALUES ('$doctorName', '$doctorAge', '$doctorEmail' , '$doctorGender' , '$doctorPhoneNumber' ,'$doctorQualification' , '$doctorAvailability')";
   $result =  mysqli_query($conn, $addPatientQuery);
+  
+}
 
+// Edit Doctor Details
+if(isset($Post['editDoctorBtn'])){
+  $doctorName = $_POST['doctorName'];
+  $doctorAge = $_POST['doctorAge'];
+  $doctorEmail = $_POST['doctorEmail'];
+  $doctorGender = $_POST['doctorGender'];
+  $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
+  $doctorQualification = $_POST['doctorQualification'];
+  $doctorAvailability = $_POST['doctorAvailability'];
+
+mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorQualification='$doctorQualification' , doctorAvailability='$doctorAvailability'  WHERE doctorId=$id");
 }
 
 //Delete Doctor Details
 if(isset($_POST['deleteDoctorBtn'])){
 
     $id = $_POST['doctorId'];
-
+    
     $deletePatientQuery = mysqli_query($conn,"DELETE From doctors Where doctorId = '$id'");
-
+    
     if($deleteQuery){
-        echo "<script>
-        alert('Doctor Deleted Successfully!')
-        location.assign('doctor.php')
-        </script>";
+      echo "<script>
+      alert('Doctor Deleted Successfully!')
+      location.assign('doctor.php')
+      </script>";
     }
-}
 
-// Edit Doctor Details
-if(isset($Post['editDoctorBtn'])){
-
-  mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber'  WHERE doctorId=$id");
-  
-}
-
-// Add Patient
-
+  }
 ?>

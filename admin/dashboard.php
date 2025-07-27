@@ -1,3 +1,19 @@
+<?php include('../code.php');
+
+// View Doctor Details
+$viewDoctorQuery = "SELECT * FROM doctors ";
+$viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
+while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
+    $doctorId = $doctor['doctorId'];
+    $doctorName = $doctor['doctorName'];
+    $doctorAge = $doctor['doctorAge'];
+    $doctorEmail = $doctor['doctorEmail'];
+    $doctorGender = $doctor['doctorGender'];
+    $doctorPhoneNumber = $doctor['doctorPhoneNumber'];
+    $doctorQualification = $doctor['doctorQualification'];
+    $doctorAvailability = $doctor['doctorAvailability'];}?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +129,7 @@
                             <option value="sceduled">Scheduled</option>
                         </select>
                          <a href="doctor.php">
-                        <button class="add"><i class="ri-add-line"></i>Add Doctor</button>
+                        <button class="add" name='addDoctorBtn'><i class="ri-add-line"></i>Add Doctor</button>
 </a>
                     </div>
                 </div>
