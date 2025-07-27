@@ -17,12 +17,6 @@
             </a>
         </li>
         <li>
-            <a href="#">
-                <span class="icon icon-2"><i class="ri-calendar-2-line"></i></span>
-                <span class="sidebar--item">Schedule</span>
-            </a>
-        </li>
-        <li>
             <a href="/Care/admin/doctor.php">
                 <span class="icon icon-3"><i class="ri-user-2-line"></i></span>
                 <span class="sidebar--item" style="white-space: nowrap;">Reliable Doctor</span>
@@ -34,22 +28,10 @@
                 <span class="sidebar--item">Patients</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <span class="icon icon-5"><i class="ri-line-chart-line"></i></span>
-                <span class="sidebar--item">Activity</span>
-            </a>
-        </li>
     </ul>
 
     <!-- Bottom section: settings and logout -->
     <ul class="sidebar-bottom-items">
-        <li>
-            <a href="#">
-                <span class="icon icon-7"><i class="ri-settings-3-line"></i></span>
-                <span class="sidebar--item">Settings</span>
-            </a>
-        </li>
         <li>
             <a href="#">
                 <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
