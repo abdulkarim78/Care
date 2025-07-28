@@ -454,6 +454,90 @@ td, th { padding-block: 10px; }
 .confirmed { color: #70d7a5; }
 .rejected { color: #e86786; }
 
+/* ===================== ADD DOCTOR FORM ===================== */
+.doctor-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 85vh;
+  padding: 2rem;
+}
+
+/* Form container */
+form.form.wide-form {
+  background-color: var(--light-bg);
+  padding: 3rem 4rem;
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 1100px;
+  transition: 0.3s ease;
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 30px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* Two-column layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Input group styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.85rem 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fefefe;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Submit button styling */
+.submit-btn {
+  padding: 0.9rem 2rem;
+  background-color: var(--blue);
+  color: #fff;
+  border: none;
+  font-size: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--light-color);
+}
+
 
 
 /* ===================== RESPONSIVE DESIGN ===================== */
@@ -465,13 +549,43 @@ td, th { padding-block: 10px; }
     table { min-width: 600px; }
 }
 
+@media screen and (max-width: 500px) {
+    .form {
+        padding: 1.5rem;
+        gap: 1.2rem;
+    }
+
+    .form span {
+        font-size: 1.2rem;
+    }
+
+    .form .box,
+    .link-btn {
+        font-size: 1.2rem;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .logo { padding-left: 30px; width: fit-content; }
     .search--notification--profile { padding: 0 20px; margin-left: auto; }
     .main--content { padding: 0 20px; }
     .sidebar { padding: 20px; }
     .sidebar.active { width: 85px; }
-    .main--content.active { width: calc(100% - 85px); }
+    .main--content.active { width: calc(100% - 85px); 
+     form.form.wide-form {
+    padding: 2rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  form h2 {
+    font-size: 26px;
+  }
+}
+  
 }
 
 @media screen and (max-width: 590px) {

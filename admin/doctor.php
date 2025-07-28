@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctors - ClyraMed</title>
-    <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Remix Icon CDN -->
+    <!-- External CSS and Remix Icon Library -->
+    <link rel="stylesheet" href="admin.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Internal Styling for Doctor Cards -->
     <style>
-        /* Page-specific styling */
         .doctors--cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -81,77 +82,53 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- ================= HEADER SECTION ================= -->
-    <section class="header">
-        <div class="logo">
-            <i class="ri-menu-line icon icon-0 menu"></i>
-            <h2>Clyra<span>Med</span></h2>
-        </div>
-
-        <div class="search--notification--profile">
-            <div class="search">
-                <input type="text" placeholder="Search...">
-                <button><i class="ri-search-2-line"></i></button>
-            </div>
-
-            <div class="notification--profile">
-                <div class="picon lock"><i class="ri-lock-line"></i></div>
-                <div class="picon bell"><i class="ri-notification-2-line"></i></div>
-                <div class="picon chat"><i class="ri-wechat-2-line"></i></div>
-                <div class="picon profile">
-                    <img src="component/profile.jpg" alt="Profile Picture">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= MAIN SECTION ================= -->
+    <!-- Include Header and Sidebar -->
+    <?php include 'component/header.php'; ?>
     <section class="main">
-        <!-- Sidebar included -->
         <?php include 'component/sidebar.php'; ?>
 
-        <!-- ========== Main content area ========== -->
         <div class="main--content">
-            <!-- ===== Doctors Grid Section ===== -->
+            <!-- Doctors Section -->
             <div class="doctors">
                 <div class="title">
                     <h2 class="section--title">Our Doctors</h2>
                     <div class="doctors--right--btns">
+                        <!-- Dropdown Filter -->
                         <select name="filter" class="dropdown doctor--filter">
                             <option>Filter</option>
                             <option value="free">Free</option>
                             <option value="scheduled">Scheduled</option>
                         </select>
+
+                        <!-- Add Doctor Button -->
                         <a href="./addDoctor.php">
-                            <button class="add"><i class="ri-add-line"></i> Add Doctor</button>
+                            <button class="add"><i class="ri-add-line"></i>Add Doctor</button>
                         </a>
                     </div>
                 </div>
 
-                <!-- Doctor Cards -->
+                <!-- Doctor Cards Grid -->
                 <div class="doctors--cards">
                     <a href="#" class="doctor--card">
                         <div class="img--box--cover">
                             <div class="img--box">
-                                <img src="doctor1.jpg" alt="Dr. John Smith">
+                                <img src="../assets/doctor1.jpg" alt="Dr. John Smith">
                             </div>
                         </div>
                         <h4>Dr. John Smith</h4>
                         <p class="specialty">Cardiologist</p>
                         <span class="status scheduled">Scheduled</span>
                     </a>
-
                 </div>
             </div>
-       
 
-            <!-- ===== Recent Doctors Table ===== -->
+            <!-- Recent Doctors Table -->
             <div class="recents-patients">
                 <div class="title">
                     <h2 class="section--title">Recent Doctors</h2>
                 </div>
-
                 <div class="table">
                     <table>
                         <thead>
@@ -164,24 +141,36 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Doctor Row 1 -->
                             <tr>
                                 <td>Dr. John Smith</td>
                                 <td>24/07/2025</td>
                                 <td>Cardiologist</td>
                                 <td class="scheduled">Scheduled</td>
                                 <td>
-                                    <i class="ri-edit-line edit" name="editDoctor"></i>
-                                    <i class="ri-delete-bin-line delete"></i>
+                                    <!-- Edit & Delete Icons -->
+                                    <a href="edit.php" class="icon-link">
+                                        <i class="ri-edit-line edit" title="Edit"></i>
+                                    </a>
+                                    <a href="delete.php" class="icon-link">
+                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
+                                    </a>
                                 </td>
                             </tr>
+
+                            <!-- Doctor Row 2 -->
                             <tr>
                                 <td>Dr. Emily Davis</td>
                                 <td>20/07/2025</td>
                                 <td>Dermatologist</td>
                                 <td class="free">Free</td>
                                 <td>
-                                    <i class="ri-edit-line edit" name="editDoctor"></i>
-                                    <i class="ri-delete-bin-line delete" name="DeleteDoctor"></i>
+                                    <a href="edit.php" class="icon-link">
+                                        <i class="ri-edit-line edit" title="Edit"></i>
+                                    </a>
+                                    <a href="delete.php" class="icon-link">
+                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -191,7 +180,8 @@
         </div>
     </section>
 
-    <!-- Sidebar toggle script -->
+    <!-- Sidebar JS Toggle -->
     <script src="component/sidebar.js"></script>
 </body>
+
 </html>

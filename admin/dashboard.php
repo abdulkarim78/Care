@@ -20,35 +20,13 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Main CSS for dashboard -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
     <!-- Remix Icon CDN -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 <body>
     <!-- ================= HEADER SECTION ================= -->
-    <section class="header">
-        <div class="logo">
-            <i class="ri-menu-line icon icon-0 menu"></i>
-            <h2>Clyra<span>Med</span></h2>
-        </div>
-
-        <div class="search--notification--profile">
-            <div class="search">
-                <input type="text" placeholder="Search...">
-                <button><i class="ri-search-2-line"></i></button>
-            </div>
-
-            <div class="notification--profile">
-                <div class="picon lock"><i class="ri-lock-line"></i></div>
-                <div class="picon bell"><i class="ri-notification-2-line"></i></div>
-                <div class="picon chat"><i class="ri-wechat-2-line"></i></div>
-                <div class="picon profile">
-                    <img src="component/profile.jpg" alt="Profile Picture">
-                </div>
-            </div>
-        </div>
-    </section>
-
+             <?php include 'component/header.php'; ?>
     <!-- ================= MAIN SECTION ================= -->
     <section class="main">
         <!-- Sidebar included -->
@@ -140,7 +118,7 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
                     <a href="#" class="doctor--card">
                         <div class="img--box--cover">
                             <div class="img--box">
-                                <img src="doctor1.jpg" alt="">
+                                <img src="../assets/doctor1.jpg" alt="">
                             </div>
                         </div>
                         <p class="scheduled">Scheduled</p>

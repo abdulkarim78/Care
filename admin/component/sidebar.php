@@ -3,7 +3,7 @@
 ?>
 
 <!-- Sidebar Styles & Icons -->
-<link rel="stylesheet" href="./sidebar.css">
+<link rel="stylesheet" href="sidebar.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
 <!-- Sidebar Structure -->
