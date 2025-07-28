@@ -23,6 +23,7 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
     <link rel="stylesheet" href="admin.css">
     <!-- Remix Icon CDN -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <title>Dashboard</title>
 </head>
 <body>
     <!-- ================= HEADER SECTION ================= -->
