@@ -34,7 +34,7 @@ if(isset($_POST['addDoctor'])){
 }
 
 // Edit Doctor Details
-if(isset($Post['editDoctorBtn'])){
+if(isset($Post['editDoctor'])){
   $doctorName = $_POST['doctorName'];
   $doctorAge = $_POST['doctorAge'];
   $doctorEmail = $_POST['doctorEmail'];
@@ -47,7 +47,7 @@ mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$do
 }
 
 //Delete Doctor Details
-if(isset($_POST['deleteDoctorBtn'])){
+if(isset($_POST['deleteDoctor'])){
 
     $id = $_POST['doctorId'];
     

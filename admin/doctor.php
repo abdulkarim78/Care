@@ -123,7 +123,9 @@
                             <option value="free">Free</option>
                             <option value="scheduled">Scheduled</option>
                         </select>
-                        <button class="add"><i class="ri-add-line"></i> Add Doctor</button>
+                        <a href="./addDoctor.php">
+                            <button class="add"><i class="ri-add-line"></i> Add Doctor</button>
+                        </a>
                     </div>
                 </div>
 
@@ -168,7 +170,7 @@
                                 <td>Cardiologist</td>
                                 <td class="scheduled">Scheduled</td>
                                 <td>
-                                    <i class="ri-edit-line edit"></i>
+                                    <i class="ri-edit-line edit" name="editDoctor"></i>
                                     <i class="ri-delete-bin-line delete"></i>
                                 </td>
                             </tr>
@@ -178,7 +180,7 @@
                                 <td>Dermatologist</td>
                                 <td class="free">Free</td>
                                 <td>
-                                    <i class="ri-edit-line edit"></i>
+                                    <i class="ri-edit-line edit" name="editDoctor"></i>
                                     <i class="ri-delete-bin-line delete"></i>
                                 </td>
                             </tr>
