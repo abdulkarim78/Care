@@ -181,7 +181,7 @@
                                 <td class="free">Free</td>
                                 <td>
                                     <i class="ri-edit-line edit" name="editDoctor"></i>
-                                    <i class="ri-delete-bin-line delete"></i>
+                                    <i class="ri-delete-bin-line delete" name="DeleteDoctor"></i>
                                 </td>
                             </tr>
                         </tbody>
