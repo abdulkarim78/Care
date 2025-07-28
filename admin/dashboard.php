@@ -52,7 +52,7 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
     <!-- ================= MAIN SECTION ================= -->
     <section class="main">
         <!-- Sidebar included -->
-<?php include 'component/sidebar.php'; ?>
+        <?php include 'component/sidebar.php'; ?>
 
         <!-- ========== Main dashboard content ========== -->
         <div class="main--content">
@@ -128,9 +128,9 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
                             <option value="free">Free</option>
                             <option value="sceduled">Scheduled</option>
                         </select>
-                         <a href="doctor.php">
-                        <button class="add" name='addDoctorBtn'><i class="ri-add-line"></i>Add Doctor</button>
-</a>
+                        <a href="addDoctor.php">
+                        <button class="add"><i class="ri-add-line"></i>Add Doctor</button>
+                        </a>
                     </div>
                 </div>
 
@@ -141,54 +141,6 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
                         <div class="img--box--cover">
                             <div class="img--box">
                                 <img src="doctor1.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="scheduled">Scheduled</p>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor2.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="free">Free</p>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctior3.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="scheduled">Scheduled</p>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor4.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="scheduled">Scheduled</p>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor5.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="free">Free</p>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor6.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="free">free</p>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor7.jpg" alt="">
                             </div>
                         </div>
                         <p class="scheduled">Scheduled</p>

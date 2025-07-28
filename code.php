@@ -15,7 +15,7 @@ if (!$conn) {
 
 
 //Add Doctor Details
-if(isset($_POST['addDoctorBtn'])){
+if(isset($_POST['addDoctor'])){
   $doctorName = $_POST['doctorName'];
   $doctorAge = $_POST['doctorAge'];
   $doctorEmail = $_POST['doctorEmail'];
@@ -26,6 +26,10 @@ if(isset($_POST['addDoctorBtn'])){
   
   $addPatientQuery = "INSERT INTO doctors (doctorName, doctorAge , doctorEmail , doctorGender , doctorPhoneNumber , doctorQualification , doctorAvailability) VALUES ('$doctorName', '$doctorAge', '$doctorEmail' , '$doctorGender' , '$doctorPhoneNumber' ,'$doctorQualification' , '$doctorAvailability')";
   $result =  mysqli_query($conn, $addPatientQuery);
+
+  if($result){
+    header('location:admin/dashboard.php');
+  }
   
 }
 

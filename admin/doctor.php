@@ -140,68 +140,6 @@
                         <span class="status scheduled">Scheduled</span>
                     </a>
 
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor2.jpg" alt="Dr. Emily Davis">
-                            </div>
-                        </div>
-                        <h4>Dr. Emily Davis</h4>
-                        <p class="specialty">Dermatologist</p>
-                        <span class="status free">Free</span>
-                    </a>
-
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor3.jpg" alt="Dr. Michael Lee">
-                            </div>
-                        </div>
-                        <h4>Dr. Michael Lee</h4>
-                        <p class="specialty">Neurologist</p>
-                        <span class="status scheduled">Scheduled</span>
-                    </a>
-
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor4.jpg" alt="Dr. Sarah Johnson">
-                            </div>
-                        </div>
-                        <h4>Dr. Sarah Johnson</h4>
-                        <p class="specialty">Orthopedic</p>
-                        <span class="status scheduled">Scheduled</span>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor5.jpg" alt="Dr. William Brown">
-                            </div>
-                        </div>
-                        <h4>Dr. William Brown</h4>
-                        <p class="specialty">Pediatrician</p>
-                        <span class="status free">Free</span>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor6.jpg" alt="Dr. Olivia Taylor">
-                            </div>
-                        </div>
-                        <h4>Dr. Olivia Taylor</h4>
-                        <p class="specialty">Gynecologist</p>
-                        <span class="status free">Free</span>
-                    </a>
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="doctor7.jpg" alt="Dr. Daniel White">
-                            </div>
-                        </div>
-                        <h4>Dr. Daniel White</h4>
-                        <p class="specialty">ENT Specialist</p>
-                        <span class="status scheduled">Scheduled</span>
-                    </a>
                 </div>
             </div>
        
@@ -210,7 +148,6 @@
             <div class="recents-patients">
                 <div class="title">
                     <h2 class="section--title">Recent Doctors</h2>
-                    <button class="add"><i class="ri-add-line"></i> Add Doctor</button>
                 </div>
 
                 <div class="table">
