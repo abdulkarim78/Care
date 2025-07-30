@@ -1,9 +1,9 @@
+<?php include('../code.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Add Doctor</title>
+    <title>Add Doctors</title>
 
     <!-- External stylesheet for styling -->
     <link rel="stylesheet" href="admin.css">
@@ -26,34 +26,47 @@
             
             <!-- Section title -->
             <div class="title">
-              <center><h2 class="section--title">Register New Doctor</h2></center>
-
-            </div>
+              <center><h2 class="section--title">Register New Doctors</h2></center>
+doctor            </div>
 
             <!-- =================== FORM START =================== -->
-             <div class="doctor-form-wrapper">
-  <form action="adddoctor.php" method="POST" class="form wide-form">
+<div class="doctor-form-wrapper">
+  <form action="addDoctor.php" method="POST" class="form wide-form">
     <h2>Add Doctor</h2>
 
     <div class="form-grid">
       <div class="form-group">
         <label>Doctor Name:</label>
-        <input type="text" name="name" placeholder="Enter full name" required>
+        <input type="text" name="doctorName" placeholder="Enter full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Age:</label>
+        <input type="number" name="doctorAge" placeholder="Enter age" required>
       </div>
 
       <div class="form-group">
         <label>Email Address:</label>
-        <input type="email" name="email" placeholder="Enter email" required>
+        <input type="email" name="doctorEmail" placeholder="Enter email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gender:</label>
+                <select name="doctorGender" class="box" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
       </div>
 
       <div class="form-group">
         <label>Phone Number:</label>
-        <input type="tel" name="phone" placeholder="Enter phone" required>
+        <input type="tel" name="doctorPhoneNumber" placeholder="Enter phone" required>
       </div>
 
       <div class="form-group">
         <label>Qualification:</label>
-        <input type="text" name="qualification" placeholder="Enter qualification" required>
+        <input type="text" name="doctorQualification" placeholder="Enter qualification" required>
       </div>
 
       <div class="form-group">
@@ -67,7 +80,7 @@
                 
 
                 <!-- Submit Button -->
-    <button type="submit" class="submit-btn">Add Doctor</button>
+    <button type="submit" class="submit-btn" name="addDoctor">Add Doctor</button>
             </form>
             </div>
             <!-- =================== FORM END =================== -->

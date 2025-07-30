@@ -1,171 +1,80 @@
+<?php include('../code.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard - ClyraMed</title>
-
-    <!-- Main CSS file for dashboard layout and component styling -->
+    <title>Add Patients</title>
+    <!-- External stylesheet for styling -->
     <link rel="stylesheet" href="admin.css">
-
-    <!-- Remix Icon CDN for UI icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    <!-- ================== HEADER SECTION ================== -->
+    <!-- ================= HEADER SECTION ================= -->
+    <!-- Including reusable header component -->
     <?php include 'component/header.php'; ?>
 
-    <!-- ================== MAIN SECTION ================== -->
+    <!-- ================= MAIN SECTION ================= -->
     <section class="main">
 
-        <!-- ========== SIDEBAR SECTION (Navigation links) ========== -->
+        <!-- Including sidebar component (navigation links) -->
         <?php include 'component/sidebar.php'; ?>
 
-        <!-- ========== MAIN CONTENT AREA ========== -->
+        <!-- Main content area beside sidebar -->
         <div class="main--content">
-
-            <!-- ===== OVERVIEW CARDS ===== -->
-            <div class="overview">
-
-                <!-- Title + Date filter dropdown -->
-                <div class="title">
-                    <h2 class="section-title">Overview</h2>
-                    <select name="date" id="date" class="dropdown">
-                        <option value="today">Today</option>
-                        <option value="lastweek">Last Week</option>
-                        <option value="lastmonth">Last Month</option>
-                        <option value="lastyear">Last Year</option>
-                        <option value="alltime">All Time</option>
-                    </select>
-                </div>
-
-                <!-- === Summary cards (Patients & Schedule) === -->
-                <div class="cards">
-
-                    <!-- Total Patients Card -->
-                    <div class="card card-2">
-                        <div class="card--data">
-                            <div class="card--content">
-                                <h5 class="card--title">Total Patients</h5>
-                                <h1>1145</h1>
-                            </div>
-                            <i class="ri-user-line card--icon--lg"></i>
-                        </div>
-                        <div class="card--stats">
-                            <span><i class="ri-bar-chart-fill card--icon stat--icon"></i>82%</span>
-                            <span><i class="ri-arrow-up-s-fill card--icon up--arrow"></i>230</span>
-                            <span><i class="ri-arrow-down-s-fill card--icon down--arrow"></i>45</span>
-                        </div>
-                    </div>
-
-                    <!-- Schedule Card -->
-                    <div class="card card-3">
-                        <div class="card--data">
-                            <div class="card--content">
-                                <h5 class="card--title">Schedule</h5>
-                                <h1>102</h1>
-                            </div>
-                            <i class="ri-calendar-2-line card--icon--lg"></i>
-                        </div>
-                        <div class="card--stats">
-                            <span><i class="ri-bar-chart-fill card--icon stat--icon"></i>27%</span>
-                            <span><i class="ri-arrow-up-s-fill card--icon up--arrow"></i>31</span>
-                            <span><i class="ri-arrow-down-s-fill card--icon down--arrow"></i>23</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ===== RECENT PATIENTS TABLE ===== -->
-            <div class="recents-patients">
-
-                <!-- Section Title and Add Patient Button -->
-                <div class="title">
-                    <h2 class="section--title">Recent Patients</h2>
-                    <!-- Add Patient Button (link it to add_patient.php if applicable) -->
-                    <a href="add_patient.php"><button class="add"><i class="ri-add-line"></i>Register Patient</button></a>
-                </div>
-
-                <!-- === Patients Table === -->
-                <div class="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Date In</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Status</th>
-                                <th>Settings</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <!-- ===== Example Patient Row 1 ===== -->
-                            <tr>
-                                <td>Cameron Williamson</td>
-                                <td>24/07/2025</td>
-                                <td>Male</td>
-                                <td>29</td>
-                                <td class="pending">Pending</td>
-                                <td>
-                                    <a href="edit.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="delete.php" class="icon-link" >
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <!-- ===== Example Patient Row 2 ===== -->
-                            <tr>
-                                <td>Sarah Connor</td>
-                                <td>23/07/2025</td>
-                                <td>Female</td>
-                                <td>34</td>
-                                <td class="rejected">Rejected</td>
-                                <td>
-                                    <a href="edit.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="delete.php" class="icon-link">
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <!-- ===== Example Patient Row 3 ===== -->
-                            <tr>
-                                <td>James Brown</td>
-                                <td>22/07/2025</td>
-                                <td>Male</td>
-                                <td>41</td>
-                                <td class="pending">Pending</td>
-                                <td>
-                                    <a href="edit.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="delete.php" class="icon-link">
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
+            
+            <!-- Section title -->
+            <div class="title">
+              <center><h2 class="section--title">Register New Patients</h2></center>
 
             </div>
+
+            <!-- =================== FORM START =================== -->
+             <div class="doctor-form-wrapper">
+  <form action="addPatient.php" method="POST" class="form wide-form">
+    <h2>Add Patient</h2>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Patient Name:</label>
+        <input type="text" name="patientName" placeholder="Enter full name" required>
+      </div>
+
+      <div class="form-group">
+          <label>Age:</label>
+          <input type="number" name="patientAge" placeholder="Enter age" required>
         </div>
 
+      <div class="form-group">
+        <label>Email Address:</label>
+        <input type="email" name="patientEmail" placeholder="Enter email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number:</label>
+        <input type="tel" name="patientPhone" placeholder="Enter phone" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gender:</label>
+                <select name="patientGender" class="box" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                </div>
+                </div>
+                
+
+                <!-- Submit Button -->
+    <button type="submit" name="addPatient" class="submit-btn">Add Patient</button>
+            </form>
+            </div>
+            <!-- =================== FORM END =================== -->
+        
     </section>
 
-    <!-- Sidebar JavaScript logic for toggle/collapse -->
+    <!-- Sidebar toggle JavaScript (for responsive toggle menu) -->
     <script src="component/sidebar.js"></script>
 </body>
 

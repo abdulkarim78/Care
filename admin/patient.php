@@ -34,7 +34,7 @@
                 <div class="title">
                     <h2 class="section--title">Recent Patients</h2>
                     <!-- Add Patient Button (link it to add_patient.php if applicable) -->
-                    <a href="add_patient.php"><button class="add"><i class="ri-add-line"></i>Register Patient</button></a>
+                    <a href="addPatient.php"><button class="add"><i class="ri-add-line"></i>Add Patient</button></a>
                 </div>
 
                 <!-- === Patients Table === -->
