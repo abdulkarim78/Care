@@ -66,20 +66,25 @@ if(isset($_POST['deleteDoctor'])){
 
 // Add Patient Details
 if(isset($_POST['addPatient'])){
-    $patientName = $_POST['patientName'];
-    $patientAge = $_POST['patientAge'];
-    $patientEmail = $_POST['patientEmail'];
-    $patientPhone = $_POST['patientPhone'];
-    $patientGender = $_POST['patientGender'];
+    $patientName = mysqli_real_escape_string($conn, $_POST['patientName']);
+    $patientAge = mysqli_real_escape_string($conn, $_POST['patientAge']);
+    $patientEmail = mysqli_real_escape_string($conn, $_POST['patientEmail']);
+    $patientPhone = mysqli_real_escape_string($conn, $_POST['patientPhone']);
+    $patientGender = mysqli_real_escape_string($conn, $_POST['patientGender']);
 
+    $addPatientQuery = "INSERT INTO patients (patientName, patientAge, patientEmail, patientPhone, patientGender)
+                        VALUES ('$patientName', '$patientAge', '$patientEmail', '$patientPhone', '$patientGender')";
 
-    $addPatientQuery = "INSERT INTO patients (patientName , patientAge , patientEmail , patientPhone , patientGender) VALUES ('$patientName', '$patientAge', '$patientEmail', '$patientPhone' , '$patientGender')";
     $result = mysqli_query($conn, $addPatientQuery);
 
     if($result){
-    header('location:admin/dashboard.php');
+        header('location:dashboard.php');
+        exit;
+    } else {
+        echo "Query Error: " . mysqli_error($conn);
     }
 }
+
 
 // Edit Patient Details
 if(isset($_POST['editPatient'])){
