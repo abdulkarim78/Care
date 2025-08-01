@@ -138,11 +138,27 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            // Fetch all patients from database
+                            $viewPatientQuery = "SELECT * FROM patients ORDER BY patientId DESC";
+                            $viewPatientResult = mysqli_query($conn, $viewPatientQuery);
+                            
+                            // Check if there are any patients
+                            if(mysqli_num_rows($viewPatientResult) > 0) {
+                                // Loop through each patient record
+                                while($patient = mysqli_fetch_assoc($viewPatientResult)) {
+                                    $patientId = $patient['patientId'];
+                                    $patientName = $patient['patientName'];
+                                    $patientGender = $patient['patientGender'];
+                                    $patientAge = $patient['patientAge'];
+                                    // Get current date for "Date in" field
+                                    $dateIn = date("d/m/Y");}}
+                            ?>
                             <tr>
-                                <td>Cameron Willamson</td>
+                                <td><?php echo $patientName?> </td>
                                 <td>30/02/2025</td>
-                                <td>Male</td>
-                                <td>25</td>
+                                <td><?php echo $patientGender ?></td>
+                                <td><?php echo $patientAge ?></td>
                                 <td class="pending">pending</td>
                                 <td>
                                     <span>
