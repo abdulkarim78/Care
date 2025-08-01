@@ -102,11 +102,10 @@ if(isset($_POST['editPatient'])){
 }
 
 //Delete Patient Details
-if(isset($_POST['deletePtient'])){
-
-    $patientid = $_POST['patientId'];
+if(isset($_POST['deletePatient'])){
+    $patientId = $_POST['patientId'];
     
-    $deletePatientQuery = mysqli_query($conn,"DELETE From patients Where patientId = '$patientid'");
+    $deletePatientQuery = mysqli_query($conn,"DELETE From patients Where patientId = '$patientId'");
     
     if($deletePatientQuery){
       echo "<script>
