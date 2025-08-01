@@ -1,19 +1,4 @@
-<?php include('../code.php');
-
-// View Doctor Details
-$viewDoctorQuery = "SELECT * FROM doctors ";
-$viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
-while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
-    $doctorId = $doctor['doctorId'];
-    $doctorName = $doctor['doctorName'];
-    $doctorAge = $doctor['doctorAge'];
-    $doctorEmail = $doctor['doctorEmail'];
-    $doctorGender = $doctor['doctorGender'];
-    $doctorPhoneNumber = $doctor['doctorPhoneNumber'];
-    $doctorQualification = $doctor['doctorQualification'];
-    $doctorAvailability = $doctor['doctorAvailability'];}?>
-
-
+<?php include('../code.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +82,9 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
             </div>
 
               <!-- ===== Doctors section ===== -->
+                <!-- ========== Fetch Doctors Details ======= -->
+                <?php $viewDoctorQuery = "SELECT * FROM doctors ";
+                $viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);?>
             <div class="doctors">
                 <div class="title">
                     <h2 class="section--title">Doctors</h2>
@@ -115,6 +103,7 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
 
                 <!-- Doctor cards grid -->
                 <div class="doctors--cards">
+                    <?php while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){?>
                     <!-- Each doctor card includes image and status -->
                     <a href="#" class="doctor--card">
                         <div class="img--box--cover">
@@ -125,6 +114,7 @@ while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){
                         <p class="scheduled">Scheduled</p>
                     </a>
                 </div>
+                    <?php } ?>
             </div>
 
             <!-- Recent Patients Section -->
