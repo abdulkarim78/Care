@@ -1,3 +1,6 @@
+<?php 
+    include('../code.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +41,7 @@
                 </div>
 
                 <!-- === Patients Table === -->
+                 
                 <div class="table">
                     <table>
                         <thead>
@@ -51,13 +55,28 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <?php
+                            // Fetch all patients from database
+                            $viewPatientQuery = "SELECT * FROM patients ORDER BY patientId DESC";
+                            $viewPatientResult = mysqli_query($conn, $viewPatientQuery);
+                            
+                            // Check if there are any patients
+                            if(mysqli_num_rows($viewPatientResult) > 0) {
+                                // Loop through each patient record
+                                while($patient = mysqli_fetch_assoc($viewPatientResult)) {
+                                    $patientId = $patient['patientId'];
+                                    $patientName = $patient['patientName'];
+                                    $patientGender = $patient['patientGender'];
+                                    $patientAge = $patient['patientAge'];
+                                    // Get current date for "Date in" field
+                                    $dateIn = date("d/m/Y");
+                            ?>
                             <!-- ===== Example Patient Row 1 ===== -->
                             <tr>
-                                <td>Cameron Williamson</td>
+                                <td><?php echo $patientName?></td>
                                 <td>24/07/2025</td>
-                                <td>Male</td>
-                                <td>29</td>
+                                <td><?php echo $patientGender?></td>
+                                <td><?php echo $patientAge?></td>
                                 <td class="pending">Pending</td>
                                 <td>
                                     <a href="edit.php" class="icon-link">
@@ -68,41 +87,14 @@
                                     </a>
                                 </td>
                             </tr>
-
-                            <!-- ===== Example Patient Row 2 ===== -->
-                            <tr>
-                                <td>Sarah Connor</td>
-                                <td>23/07/2025</td>
-                                <td>Female</td>
-                                <td>34</td>
-                                <td class="rejected">Rejected</td>
-                                <td>
-                                    <a href="edit.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="delete.php" class="icon-link">
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <!-- ===== Example Patient Row 3 ===== -->
-                            <tr>
-                                <td>James Brown</td>
-                                <td>22/07/2025</td>
-                                <td>Male</td>
-                                <td>41</td>
-                                <td class="pending">Pending</td>
-                                <td>
-                                    <a href="edit.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="delete.php" class="icon-link">
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
+                            <?php
+                            }
+                            }
+                            else {
+                                // Display message if no patients found
+                                echo "<tr><td colspan='6' style='text-align:center'>No patients found</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

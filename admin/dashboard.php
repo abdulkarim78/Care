@@ -121,7 +121,7 @@
             <div class="recents-patients">
                 <div class="title">
                     <h2 class="section--title">Recent Patient</h2>
-                    <a href="patient.php">
+                    <a href="addPatient.php">
                     <button class="add"><i class="ri-add-line"></i>Add Patient</button></a>
                 </div>
 
@@ -152,7 +152,7 @@
                                     $patientGender = $patient['patientGender'];
                                     $patientAge = $patient['patientAge'];
                                     // Get current date for "Date in" field
-                                    $dateIn = date("d/m/Y");}}
+                                    $dateIn = date("d/m/Y");
                             ?>
                             <tr>
                                 <td><?php echo $patientName?> </td>
@@ -167,6 +167,14 @@
                                     </span>
                                 </td>
                             </tr>
+                            <?php
+                            }
+                            }
+                            else {
+                                // Display message if no patients found
+                                echo "<tr><td colspan='6' style='text-align:center'>No patients found</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
