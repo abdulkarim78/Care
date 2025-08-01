@@ -50,7 +50,6 @@
                                 <th>Date In</th>
                                 <th>Gender</th>
                                 <th>Age</th>
-                                <th>Status</th>
                                 <th>Settings</th>
                             </tr>
                         </thead>
@@ -68,16 +67,14 @@
                                     $patientName = $patient['patientName'];
                                     $patientGender = $patient['patientGender'];
                                     $patientAge = $patient['patientAge'];
-                                    // Get current date for "Date in" field
-                                    $dateIn = date("d/m/Y");
+                                    $patientDateIn = $patient['patientDateIn'];
                             ?>
                             <!-- ===== Example Patient Row 1 ===== -->
                             <tr>
                                 <td><?php echo $patientName?></td>
-                                <td>24/07/2025</td>
+                                <td><?php echo date("d-m-Y", strtotime($patientDateIn)); ?></td>
                                 <td><?php echo $patientGender?></td>
                                 <td><?php echo $patientAge?></td>
-                                <td class="pending">Pending</td>
                                 <td>
                                     <a href="edit.php" class="icon-link">
                                         <i class="ri-edit-line edit" title="Edit"></i>
