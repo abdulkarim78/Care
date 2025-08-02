@@ -33,7 +33,7 @@
     <!-- Bottom section: settings and logout -->
     <ul class="sidebar-bottom-items">
         <li>
-            <a href="#">
+            <a href="\Care\logout.php">
                 <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
                 <span class="sidebar--item">Logout</span>
             </a>

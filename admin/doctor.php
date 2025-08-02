@@ -1,3 +1,4 @@
+<?php include('../code.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,82 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctors - ClyraMed</title>
+
     <!-- External CSS and Remix Icon Library -->
     <link rel="stylesheet" href="admin.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!-- Internal Styling for Doctor Cards -->
-    <style>
-        .doctors--cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .doctor--card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .doctor--card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .img--box--cover {
-            border: 2px solid #00b8b8;
-            padding: 3px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .img--box {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .img--box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .doctor--card h4 {
-            margin: 10px 0 5px;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .specialty {
-            color: #777;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            color: #fff;
-        }
-
-        .status.free {
-            background-color: #70d7a5;
-        }
-
-        .status.scheduled {
-            background-color: #5073fb;
-        }
-    </style>
 </head>
 
 <body>
@@ -90,41 +21,54 @@
         <?php include 'component/sidebar.php'; ?>
 
         <div class="main--content">
-            <!-- Doctors Section -->
-            <div class="doctors">
-                <div class="title">
-                    <h2 class="section--title">Our Doctors</h2>
-                    <div class="doctors--right--btns">
-                        <!-- Dropdown Filter -->
-                        <select name="filter" class="dropdown doctor--filter">
-                            <option>Filter</option>
-                            <option value="free">Free</option>
-                            <option value="scheduled">Scheduled</option>
-                        </select>
+            
 
-                        <!-- Add Doctor Button -->
-                        <a href="./addDoctor.php">
-                            <button class="add"><i class="ri-add-line"></i>Add Doctor</button>
-                        </a>
+<!-- ===== Doctors section ===== -->
+<div class="doctors">
+    <div class="title">
+        <h2 class="section--title">Doctors</h2>
+        <div class="doctors--right--btns">
+            <select name="availability_filter" id="availability_filter" class="dropdown doctor--filter" onchange="filterDoctors(this.value)">
+                <option value="">Filter</option>
+                <option value="Free">Free</option>
+                <option value="Scheduled">Scheduled</option>
+            </select>
+            <a href="addDoctor.php">
+                <button class="add"><i class="ri-add-line"></i> Add Doctor</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="doctors--cards" id="doctorCards">
+        <?php
+        while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
+            <a href="#" class="doctor--card" data-status="<?= htmlspecialchars($doctor['doctorAvailability']) ?>">
+                <div class="img--box--cover">
+                    <div class="img--box">
+                        <img src="../assets/doctor.png" alt="Doctor Image">
                     </div>
                 </div>
+                <h3><?= htmlspecialchars($doctor['doctorName']) ?></h3>
 
-                <!-- Doctor Cards Grid -->
-                <div class="doctors--cards">
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="../assets/doctor1.jpg" alt="Dr. John Smith">
-                            </div>
-                        </div>
-                        <h4>Dr. John Smith</h4>
-                        <p class="specialty">Cardiologist</p>
-                        <span class="status scheduled">Scheduled</span>
-                    </a>
-                </div>
-            </div>
+                <!-- Availability Date -->
+                <p><strong>Date:</strong>
+                    <?= (!empty($doctor['availability_date']) && $doctor['availability_date'] !== '0000-00-00') 
+                        ? date('d M Y', strtotime($doctor['availability_date'])) 
+                        : 'N/A' ?>
+                </p>
 
-            <!-- Recent Doctors Table -->
+                <!-- Availability Time -->
+                <p><strong>Time:</strong>
+                    <?= (!empty($doctor['availability_time']) && $doctor['availability_time'] !== '00:00:00') 
+                        ? date('h:i A', strtotime($doctor['availability_time'])) 
+                        : 'N/A' ?>
+                </p>
+            </a>
+        <?php } ?>
+    </div>
+</div>
+
+            <!-- ===== Recent Doctors Table ===== -->
             <div class="recents-patients">
                 <div class="title">
                     <h2 class="section--title">Recent Doctors</h2>
@@ -141,15 +85,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Doctor Row 1 -->
                             <tr>
                                 <td>Dr. John Smith</td>
                                 <td>24/07/2025</td>
                                 <td>Cardiologist</td>
                                 <td class="scheduled">Scheduled</td>
                                 <td>
-                                    <!-- Edit & Delete Icons -->
-                                    <a href="edit.php" class="icon-link">
+                                    <a href="editDoctor.php" class="icon-link">
                                         <i class="ri-edit-line edit" title="Edit"></i>
                                     </a>
                                     <a href="delete.php" class="icon-link">
@@ -157,8 +99,6 @@
                                     </a>
                                 </td>
                             </tr>
-
-                            <!-- Doctor Row 2 -->
                             <tr>
                                 <td>Dr. Emily Davis</td>
                                 <td>20/07/2025</td>

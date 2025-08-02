@@ -1,4 +1,5 @@
-<?php include('../code.php');?>
+<?php include('../code.php'); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,8 @@
 </head>
 <body>
     <!-- ================= HEADER SECTION ================= -->
-             <?php include 'component/header.php'; ?>
+    <?php include 'component/header.php'; ?>
+
     <!-- ================= MAIN SECTION ================= -->
     <section class="main">
         <!-- Sidebar included -->
@@ -81,48 +83,65 @@
                 </div>
             </div>
 
-              <!-- ===== Doctors section ===== -->
-                <!-- ========== Fetch Doctors Details ======= -->
-                <?php $viewDoctorQuery = "SELECT * FROM doctors ";
-                $viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);?>
-            <div class="doctors">
-                <div class="title">
-                    <h2 class="section--title">Doctors</h2>
-                    <!-- Filter and add doctor button -->
-                    <div class="doctors--right--btns">
-                        <select name="date" id="date" class="dropdown doctor--filter">
-                            <option>Filter</option>
-                            <option value="free">Free</option>
-                            <option value="sceduled">Scheduled</option>
-                        </select>
-                        <a href="addDoctor.php">
-                        <button class="add"><i class="ri-add-line"></i>Add Doctor</button>
-                        </a>
+         
+
+
+
+<!-- ===== Doctors section ===== -->
+<div class="doctors">
+    <div class="title">
+        <h2 class="section--title">Doctors</h2>
+        <div class="doctors--right--btns">
+            <select name="availability_filter" id="availability_filter" class="dropdown doctor--filter" onchange="filterDoctors(this.value)">
+                <option value="">Filter</option>
+                <option value="Free">Free</option>
+                <option value="Scheduled">Scheduled</option>
+            </select>
+            <a href="addDoctor.php">
+                <button class="add"><i class="ri-add-line"></i> Add Doctor</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="doctors--cards" id="doctorCards">
+        <?php
+    
+
+        while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
+            <a href="#" class="doctor--card" data-status="<?= htmlspecialchars($doctor['doctorAvailability']) ?>">
+                <div class="img--box--cover">
+                    <div class="img--box">
+                        <img src="../assets/doctor.png" alt="Doctor Image">
                     </div>
                 </div>
+                <h3><?= htmlspecialchars($doctor['doctorName']) ?></h3>
 
-                <!-- Doctor cards grid -->
-                <div class="doctors--cards">
-                    <?php while ($doctor = mysqli_fetch_assoc($viewDoctorResult)){?>
-                    <!-- Each doctor card includes image and status -->
-                    <a href="#" class="doctor--card">
-                        <div class="img--box--cover">
-                            <div class="img--box">
-                                <img src="../assets/doctor1.jpg" alt="">
-                            </div>
-                        </div>
-                        <p class="scheduled">Scheduled</p>
-                    </a>
-                </div>
-                    <?php } ?>
-            </div>
+                <!-- Availability Date -->
+                <p><strong>Date:</strong>
+                    <?= (!empty($doctor['availability_date']) && $doctor['availability_date'] !== '0000-00-00') 
+                        ? date('d M Y', strtotime($doctor['availability_date'])) 
+                        : 'N/A' ?>
+                </p>
 
-            <!-- Recent Patients Section -->
+                <!-- Availability Time -->
+                <p><strong>Time:</strong>
+                    <?= (!empty($doctor['availability_time']) && $doctor['availability_time'] !== '00:00:00') 
+                        ? date('h:i A', strtotime($doctor['availability_time'])) 
+                        : 'N/A' ?>
+                </p>
+            </a>
+        <?php } ?>
+    </div>
+</div>
+            
+
+            <!-- ===== Recent Patients Section ===== -->
             <div class="recents-patients">
                 <div class="title">
                     <h2 class="section--title">Recent Patient</h2>
                     <a href="addPatient.php">
-                    <button class="add"><i class="ri-add-line"></i>Add Patient</button></a>
+                        <button class="add"><i class="ri-add-line"></i>Add Patient</button>
+                    </a>
                 </div>
 
                 <div class="table">
@@ -138,38 +157,32 @@
                         </thead>
                         <tbody>
                             <?php
-                            // Fetch all patients from database
                             $viewPatientQuery = "SELECT * FROM patients ORDER BY patientId DESC";
                             $viewPatientResult = mysqli_query($conn, $viewPatientQuery);
-                            
-                            // Check if there are any patients
-                            if(mysqli_num_rows($viewPatientResult) > 0) {
-                                // Loop through each patient record
-                                while($patient = mysqli_fetch_assoc($viewPatientResult)) {
+
+                            if (mysqli_num_rows($viewPatientResult) > 0) {
+                                while ($patient = mysqli_fetch_assoc($viewPatientResult)) {
                                     $patientId = $patient['patientId'];
                                     $patientName = $patient['patientName'];
                                     $patientGender = $patient['patientGender'];
                                     $patientAge = $patient['patientAge'];
-                                    // Get current date for "Date in" field
                                     $patientDateIn = $patient['patientDateIn'];
                             ?>
-                            <tr>
-                                <td><?php echo $patientName?> </td>
-                                <td><?php echo date("d-m-Y", strtotime($patientDateIn)); ?></td>
-                                <td><?php echo $patientGender ?></td>
-                                <td><?php echo $patientAge ?></td>
-                                <td>
-                                    <span>
-                                        <i class="ri-edit-line edit"></i>
-                                        <i class="ri-delete-bin-line delete"></i>
-                                    </span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $patientName; ?></td>
+                                    <td><?php echo date("d-m-Y", strtotime($patientDateIn)); ?></td>
+                                    <td><?php echo $patientGender; ?></td>
+                                    <td><?php echo $patientAge; ?></td>
+                                    <td>
+                                        <span>
+                                            <i class="ri-edit-line edit"></i>
+                                            <i class="ri-delete-bin-line delete"></i>
+                                        </span>
+                                    </td>
+                                </tr>
                             <?php
-                            }
-                            }
-                            else {
-                                // Display message if no patients found
+                                }
+                            } else {
                                 echo "<tr><td colspan='6' style='text-align:center'>No patients found</td></tr>";
                             }
                             ?>

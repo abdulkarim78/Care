@@ -15,25 +15,46 @@ if (!$conn) {
 
 
 //Add Doctor Details
-if(isset($_POST['addDoctor'])){
-  $doctorName = $_POST['doctorName'];
-  $doctorAge = $_POST['doctorAge'];
-  $doctorEmail = $_POST['doctorEmail'];
-  $doctorGender = $_POST['doctorGender'];
-  $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
-  $doctorQualification = $_POST['doctorQualification'];
-  $doctorAvailability = $_POST['doctorAvailability'];
-  
-  $addDoctorQuery = "INSERT INTO doctors (doctorName, doctorAge , doctorEmail , doctorGender , doctorPhoneNumber , doctorQualification , doctorAvailability) VALUES ('$doctorName', '$doctorAge', '$doctorEmail' , '$doctorGender' , '$doctorPhoneNumber' ,'$doctorQualification' , '$doctorAvailability')";
-  $result =  mysqli_query($conn, $addDoctorQuery);
+if (isset($_POST['addDoctor'])) {
+    $doctorName = $_POST['doctorName'];
+    $doctorAge = $_POST['doctorAge'];
+    $doctorEmail = $_POST['doctorEmail'];
+    $doctorGender = $_POST['doctorGender'];
+    $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
+    $doctorSpecialization = $_POST['doctorSpecialization']; // FIXED HERE
+    $doctorAvailability = $_POST['doctorAvailability'];
+    $availabilityDate = $_POST['availability_date'];
+    $availabilityTime = $_POST['availability_time'];
 
-  if($result){
-     echo "<script>
-                window.location.href = 'dashboard.php';
-              </script>";
-  }
-  
+    $addDoctorQuery = "INSERT INTO doctors (
+        doctorName, doctorAge, doctorEmail, doctorGender, doctorPhoneNumber,
+        doctorQualification, doctorAvailability, availability_date, availability_time
+    ) VALUES (
+        '$doctorName', '$doctorAge', '$doctorEmail', '$doctorGender', '$doctorPhoneNumber',
+        '$doctorSpecialization', '$doctorAvailability', '$availabilityDate', '$availabilityTime'
+    )";
+
+    $result = mysqli_query($conn, $addDoctorQuery);
+
+    if ($result) {
+        echo "<script>window.location.href = 'dashboard.php';</script>";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
+
+//view doctor details
+
+$viewDoctorQuery = "SELECT * FROM doctors";
+$viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
+
+// Error check
+if (!$viewDoctorResult) {
+    die("Query failed: " . mysqli_error($conn));
+
+}
+
+
 
 // Edit Doctor Details
 if(isset($Post['editDoctor'])){
@@ -44,6 +65,9 @@ if(isset($Post['editDoctor'])){
   $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
   $doctorQualification = $_POST['doctorQualification'];
   $doctorAvailability = $_POST['doctorAvailability'];
+  $availabilityDate = $_POST['availability_date'];
+$availabilityTime = $_POST['availability_time'];
+
 
 mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorQualification='$doctorQualification' , doctorAvailability='$doctorAvailability'  WHERE doctorId=$id");
 }
@@ -114,5 +138,22 @@ if(isset($_POST['deletePatient'])){
       </script>";
     }
 }
+// Handle Appointment Form Submission
+if (isset($_POST['submit'])) {
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $number = mysqli_real_escape_string($conn, $_POST['number']);
+    $date = mysqli_real_escape_string($conn, $_POST['date']);
+
+    $query = "INSERT INTO contact_form (name, email, number, date) VALUES ('$name', '$email', '$number', '$date')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $message[] = "Appointment made successfully!";
+    } else {
+        $message[] = "Error: " . mysqli_error($conn);
+    }
+}
+
 
 ?>

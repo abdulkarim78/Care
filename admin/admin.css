@@ -391,41 +391,99 @@ a {
 }
 
 /* Doctor cards grid */
+/* Doctor cards container */
+.doctors--cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 5px;
+    padding: 10px;
+}
+
+/* Horizontal scrollable doctor cards */
 .doctors--cards {
     display: flex;
-    gap: 20px;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 20px 10px;
+    scroll-behavior: smooth;
 }
 
-/* Individual doctor card */
+/* Optional: Hide scroll bar for cleaner look */
+.doctors--cards::-webkit-scrollbar {
+    height: 6px;
+}
+
+.doctors--cards::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.doctors--cards::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+/* Doctor card width optimized for horizontal view */
 .doctor--card {
-    padding: 20px;
-    border-radius: 20px;
-    height: auto;
-    transition: .3s;
-    border: 2px solid #f1f1f1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: .8rem;
+    flex: 0 0 220px; /* Fixed width for horizontal scrolling */
+    min-height: 260px;
+    padding: 20px 15px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #f5f7fa, #ffffff);
+    border: 1px solid #ccc;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect */
-.doctor--card:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Circular image wrapper */
+/* Image wrapper */
 .img--box--cover {
-    border: 1px solid #5073fb;
-    padding: 2px;
+    border: var(--border);
     border-radius: 50%;
-    display: inline-block;
-    margin-bottom: 10px;
+    padding: 4px;
+    margin: 0 auto 12px;
+    width: fit-content;
 }
 
-/* Status colors */
-.free { color: #70d7a5; }
-.scheduled { color: #5073fb; }
+.img--box {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.img--box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Doctor name */
+.doctor--card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+/* Specialist text */
+.doctor--card p {
+    font-size: 0.95rem;
+    margin: 4px 0;
+    color: #555;
+}
+
+/* Status styles */
+.free {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.scheduled {
+    color: #007bff;
+    font-weight: 600;
+}
+
 
 /* ===================== RECENT PATIENTS TABLE ===================== */
 .recents-patients { margin-bottom: 20px; }
@@ -536,6 +594,19 @@ form h2 {
 
 .submit-btn:hover {
   background-color: var(--light-color);
+}
+td i.edit,
+td i.delete {
+    font-size: 20px;         /* Slightly bigger icon */
+    padding: 2px;           /* Slightly bigger padding around icon */
+    border-radius: 8px;      /* Rounded corners */
+    margin-right: 8px;      
+    cursor: pointer;
+}
+td i.edit:hover,
+td i.delete:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease;
 }
 
 

@@ -1,4 +1,11 @@
 <?php
+session_start();
+$isLoggedIn = isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true;
+?>
+
+
+
+<?php
 
 $conn = mysqli_connect('localhost', 'root', '', 'care') or die("connection failed");
 
@@ -11,15 +18,10 @@ if (isset($_POST['submit'])) {
     $insert = mysqli_query($conn, "INSERT INTO contact_form (name, email, number, date) 
                 VALUES ('$name', '$email', '$number', '$date')") or die('query failed');
 
-    if ($insert) {
-        $message[] = 'appointment made successfully';
-    } else {
-        $message[] = 'appointment failed';
-
-    }
-
+    $message[] = $insert ? 'Appointment made successfully' : 'Appointment failed';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,59 +38,62 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
 
     <!---------Custom css link------>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
 
 </head>
 
 <body>
-    <!--heaader section start-------->
+ <!-- Header section start -->
+<header class="header fixed-top">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <a href="#home" class="logo">Clyra<span>Med</span></a>
 
-    <header class="header fixed-top">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <a href="#home" class="logo">Clyra<span>Med</span></a>
+            <nav class="nav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </nav>
 
-                <nav class="nav">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#services">Services</a>
-                    <a href="#reviews">Reviews</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-                <a href="#contact" class="link-btn">make appointment</a>
+            <!-- Button that changes based on login -->
+  <?php if ($isLoggedIn): ?>
+    <a href="#contact" class="link-btn">make a appointment</a>
+<?php else: ?>
+    <a href="login.php" class="link-btn">Login</a>
+<?php endif; ?>
 
-                <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+    </div>
+</header>
+<!-- Header section ends -->
 
 
 
+<!-- Home section start -->
+<section class="home" id="home">
+    <div class="container">
+        <div class="row min-vh-100 align-items-center">
+            <div class="content text-center text-md-left">
+                <h3>Your Health. Our Priority</h3>
+                <p>
+                    ClyraMed bridges the gap between patients and doctors with effortless scheduling, secure
+                    profiles, and a seamless healthcare journey.
+                </p>
+
+   <?php if ($isLoggedIn): ?>
+    <a href="#contact" class="link-btn">Make an Appointment</a>
+
+<?php else: ?>
+    <a href="login.php" class="link-btn">Login</a>
+<?php endif; ?>
             </div>
         </div>
-
-    </header>
-
-    <!-----header section ends------->
-
-
-    <!-------home section start-->
-
-    <section class="home" id="home">
-        <div class="container">
-            <div class="row min-vh-100 align-items-center">
-                <div class="content text-center text-md-left">
-                    <h3>Your Health. Our Priority</h3>
-                    <p>
-                        ClyraMed bridges the gap between patients and doctors with effortless scheduling, secure
-                        profiles, and a seamless healthcare journey.
-                    </p>
-
-
-                    <a href="#contact" class="link-btn"> Make appointment</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-----home section ed ----------->
+    </div>
+</section>
+<!-- Home section ends -->
 
     <!----about section start-->
     <section class="about" id="about">
@@ -103,7 +108,7 @@ if (isset($_POST['submit'])) {
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ea dignissimos! Similique deserunt
                         natus culpa fuga dolorem velit est quod itaque, impedit praesentium iste obcaecati dicta amet.
                         Perspiciatis, nihil quaerat?</p>
-                    <a href="#contact" class="link-btn">make appointment</a>
+                    <a href="#" class="link-btn">Learn More</a>
                 </div>
             </div>
         </div>
