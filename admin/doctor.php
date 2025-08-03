@@ -124,12 +124,15 @@ if ($viewDoctorResult && mysqli_num_rows($viewDoctorResult) > 0) {
             <td><?php echo htmlspecialchars($doctorSpecialization); ?></td>
             <td class="<?php echo $statusClass; ?>"><?php echo htmlspecialchars($doctorAvailability); ?></td>
             <td>
-                <a href="editDoctor.php?doctorId=<?php echo $doctorId; ?>" class="icon-link">
+                <a href="editDoctor.php" class="icon-link">
                     <i class="ri-edit-line edit" title="Edit"></i>
                 </a>
-                <a href="deleteDoctor.php?doctorId=<?php echo $doctorId; ?>" class="icon-link" onclick="return confirm('Are you sure you want to delete this doctor?');">
-                    <i class="ri-delete-bin-line delete" title="Delete"></i>
-                </a>
+                <form action="doctor.php" method="POST" style="display: inline;">
+                        <input type="hidden" name="doctorId" value="<?= $doctorId ?>">
+                        <button type="submit" name="deleteDoctor" style="background: none; border: none; padding: 0; cursor: pointer; " >
+                            <i class="ri-delete-bin-line delete" title="Delete"></i>
+                        </button>
+                </form>
             </td>
         </tr>
 <?php
