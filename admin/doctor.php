@@ -52,15 +52,15 @@
 
                 <!-- Availability Date -->
                 <p><strong>Date:</strong>
-                    <?= (!empty($doctor['availability_date']) && $doctor['availability_date'] !== '0000-00-00') 
-                        ? date('d M Y', strtotime($doctor['availability_date'])) 
+                    <?= (!empty($doctor['doctorAvailabilityDate']) && $doctor['doctorAvailabilityDate'] !== '0000-00-00') 
+                        ? date('d M Y', strtotime($doctor['doctorAvailabilityDate'])) 
                         : 'N/A' ?>
                 </p>
 
                 <!-- Availability Time -->
                 <p><strong>Time:</strong>
-                    <?= (!empty($doctor['availability_time']) && $doctor['availability_time'] !== '00:00:00') 
-                        ? date('h:i A', strtotime($doctor['availability_time'])) 
+                    <?= (!empty($doctor['doctorAvailabilityTime']) && $doctor['doctorAvailabilityTime'] !== '00:00:00') 
+                        ? date('h:i A', strtotime($doctor['doctorAvailabilityTime'])) 
                         : 'N/A' ?>
                 </p>
             </a>
@@ -78,41 +78,38 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Date Joined</th>
+                                <th>Available Date</th>
                                 <th>Specialty</th>
                                 <th>Status</th>
                                 <th>Settings</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dr. John Smith</td>
-                                <td>24/07/2025</td>
-                                <td>Cardiologist</td>
-                                <td class="scheduled">Scheduled</td>
-                                <td>
+                            <?php
+                            if (isset($viewDoctorResult) && mysqli_num_rows($viewDoctorResult) > 0) {
+                                while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) {
+                                    $doctorId = $doctor['doctorId'];
+                                    $doctorName = $doctor['doctorName'];
+                                    $doctorSpecialization = $doctor['doctorSpecialization'];
+                                    $doctorAvailability = $doctor['doctorAvailability'];
+                                    $doctorAvailabilityDate = $doctor['doctorAvailabilityDate'];
+                            ?>
+                        <tr>
+
+                            <td><?php echo htmlspecialchars($doctorName); ?></td>
+                            <td><?php echo htmlspecialchars($doctorAvailabilityDate); ?></td>
+                            <td><?php echo htmlspecialchars($doctorSpecialization); ?></td>
+                            <td class="scheduled"><?php echo htmlspecialchars($doctorAvailability); ?></td>
+                            <td>
                                     <a href="editDoctor.php" class="icon-link">
                                         <i class="ri-edit-line edit" title="Edit"></i>
                                     </a>
-                                    <a href="delete.php" class="icon-link">
+                                    <a href="deleteDoctor.php" class="icon-link">
                                         <i class="ri-delete-bin-line delete" title="Delete"></i>
                                     </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dr. Emily Davis</td>
-                                <td>20/07/2025</td>
-                                <td>Dermatologist</td>
-                                <td class="free">Free</td>
-                                <td>
-                                    <a href="edit.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="delete.php" class="icon-link">
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
+                            <?php }} ?>
                         </tbody>
                     </table>
                 </div>
