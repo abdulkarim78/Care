@@ -23,15 +23,15 @@ if (isset($_POST['addDoctor'])) {
     $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
     $doctorSpecialization = $_POST['doctorSpecialization']; // FIXED HERE
     $doctorAvailability = $_POST['doctorAvailability'];
-    $availabilityDate = $_POST['availability_date'];
-    $availabilityTime = $_POST['availability_time'];
+    $doctorAvailabilityDate = $_POST['doctorAvailabilityDate'];
+    $doctorAvailabilityTime = $_POST['doctorAvailabilityTime'];
 
     $addDoctorQuery = "INSERT INTO doctors (
         doctorName, doctorAge, doctorEmail, doctorGender, doctorPhoneNumber,
-        doctorQualification, doctorAvailability, availability_date, availability_time
+        doctorQualification, doctorAvailability, doctorAvailabilityDate, doctorAvailabilityTime
     ) VALUES (
         '$doctorName', '$doctorAge', '$doctorEmail', '$doctorGender', '$doctorPhoneNumber',
-        '$doctorSpecialization', '$doctorAvailability', '$availabilityDate', '$availabilityTime'
+        '$doctorSpecialization', '$doctorAvailability', '$doctorAvailabilityDate', '$doctorAvailabilityTime'
     )";
 
     $result = mysqli_query($conn, $addDoctorQuery);
@@ -44,7 +44,6 @@ if (isset($_POST['addDoctor'])) {
 }
 
 //view doctor details
-
 $viewDoctorQuery = "SELECT * FROM doctors";
 $viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
 
@@ -54,8 +53,6 @@ if (!$viewDoctorResult) {
 
 }
 
-
-
 // Edit Doctor Details
 if(isset($Post['editDoctor'])){
   $doctorName = $_POST['doctorName'];
@@ -63,18 +60,17 @@ if(isset($Post['editDoctor'])){
   $doctorEmail = $_POST['doctorEmail'];
   $doctorGender = $_POST['doctorGender'];
   $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
-  $doctorQualification = $_POST['doctorQualification'];
+  $doctorSpecialization = $_POST['doctorSpecialization'];
   $doctorAvailability = $_POST['doctorAvailability'];
-  $availabilityDate = $_POST['availability_date'];
-$availabilityTime = $_POST['availability_time'];
+  $doctorAvailabilityDate = $_POST['doctorAvailabilityDate'];
+  $doctorAvailabilityTime = $_POST['doctorAvailabilityTime'];
 
 
-mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorQualification='$doctorQualification' , doctorAvailability='$doctorAvailability'  WHERE doctorId=$id");
+mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorSpecialization='$doctorSpecialization' , doctorAvailability='$doctorAvailability' , doctorAvailabilityDate ='$doctorAvailabilityDate' , doctorAvailabilityTime = '$doctorAvailabilityTime'   WHERE doctorId=$id");
 }
 
 //Delete Doctor Details
 if(isset($_POST['deleteDoctor'])){
-
     $id = $_POST['doctorId'];
     
     $deleteDoctorQuery = mysqli_query($conn,"DELETE From doctors Where doctorId = '$id'");
@@ -109,7 +105,6 @@ if(isset($_POST['addPatient'])){
     }
 }
 
-
 // Edit Patient Details
 if(isset($_POST['editPatient'])){
     $patientName = $_POST['patientName'];
@@ -138,6 +133,8 @@ if(isset($_POST['deletePatient'])){
       </script>";
     }
 }
+
+
 // Handle Appointment Form Submission
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);

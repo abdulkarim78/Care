@@ -71,12 +71,12 @@
 </div>
 <div class="form-group">
     <label for="availabilityDate">Availability Date:</label>
-    <input type="date" id="availabilityDate" name="availability_date" class="box" required>
+    <input type="date" id="availabilityDate" name="doctorAvailabilityDate" class="box" required>
 </div>
 
 <div class="form-group">
     <label for="availabilityTime">Availability Time:</label>
-    <input type="time" id="availabilityTime" name="availability_time" class="box" required>
+    <input type="time" id="availabilityTime" name="doctorAvailabilityTime" class="box" required>
 </div>
 
 
