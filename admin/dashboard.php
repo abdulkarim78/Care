@@ -118,15 +118,15 @@
 
                 <!-- Availability Date -->
                 <p><strong>Date:</strong>
-                    <?= (!empty($doctor['availability_date']) && $doctor['availability_date'] !== '0000-00-00') 
-                        ? date('d M Y', strtotime($doctor['availability_date'])) 
+                    <?= (!empty($doctor['doctorAvailabilityDate']) && $doctor['doctorAvailabilityDate'] !== '0000-00-00') 
+                        ? date('d M Y', strtotime($doctor['doctorAvailabilityDate'])) 
                         : 'N/A' ?>
                 </p>
 
                 <!-- Availability Time -->
                 <p><strong>Time:</strong>
-                    <?= (!empty($doctor['availability_time']) && $doctor['availability_time'] !== '00:00:00') 
-                        ? date('h:i A', strtotime($doctor['availability_time'])) 
+                    <?= (!empty($doctor['doctorAvailabilityTime']) && $doctor['doctorAvailabilityTime'] !== '00:00:00') 
+                        ? date('h:i A', strtotime($doctor['doctorAvailabilityTime'])) 
                         : 'N/A' ?>
                 </p>
             </a>

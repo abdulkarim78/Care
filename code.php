@@ -28,7 +28,7 @@ if (isset($_POST['addDoctor'])) {
 
     $addDoctorQuery = "INSERT INTO doctors (
         doctorName, doctorAge, doctorEmail, doctorGender, doctorPhoneNumber,
-        doctorQualification, doctorAvailability, doctorAvailabilityDate, doctorAvailabilityTime
+        doctorSpecialization, doctorAvailability, doctorAvailabilityDate, doctorAvailabilityTime
     ) VALUES (
         '$doctorName', '$doctorAge', '$doctorEmail', '$doctorGender', '$doctorPhoneNumber',
         '$doctorSpecialization', '$doctorAvailability', '$doctorAvailabilityDate', '$doctorAvailabilityTime'
