@@ -8,7 +8,7 @@
     <title>Doctors - ClyraMed</title>
 
     <!-- External CSS and Remix Icon Library -->
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!-- Internal Styling for Doctor Cards -->
@@ -39,9 +39,9 @@
         </div>
     </div>
 
+    
     <div class="doctors--cards" id="doctorCards">
-        <?php
-        while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
+        <?php while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
             <a href="#" class="doctor--card" data-status="<?= htmlspecialchars($doctor['doctorAvailability']) ?>">
                 <div class="img--box--cover">
                     <div class="img--box">
@@ -49,6 +49,9 @@
                     </div>
                 </div>
                 <h3><?= htmlspecialchars($doctor['doctorName']) ?></h3>
+
+                <!-- City -->
+                <p><strong>City:</strong> <?= htmlspecialchars($doctor['doctorCity']) ?></p>
 
                 <!-- Availability Date -->
                 <p><strong>Date:</strong>
@@ -69,51 +72,75 @@
 </div>
 
             <!-- ===== Recent Doctors Table ===== -->
-            <div class="recents-patients">
-                <div class="title">
-                    <h2 class="section--title">Recent Doctors</h2>
-                </div>
-                <div class="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Available Date</th>
-                                <th>Specialty</th>
-                                <th>Status</th>
-                                <th>Settings</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (isset($viewDoctorResult) && mysqli_num_rows($viewDoctorResult) > 0) {
-                                while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) {
-                                    $doctorId = $doctor['doctorId'];
-                                    $doctorName = $doctor['doctorName'];
-                                    $doctorSpecialization = $doctor['doctorSpecialization'];
-                                    $doctorAvailability = $doctor['doctorAvailability'];
-                                    $doctorAvailabilityDate = $doctor['doctorAvailabilityDate'];
-                            ?>
-                        <tr>
+            <div class="recents-doctors">
+    <div class="title">
+        <h2 class="section--title">Recent Doctors</h2>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Available Date</th>
+                    <th>Available Time</th>
+                    <th>Specialty</th>
+                    <th>Status</th>
+                    <th>Settings</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                            <td><?php echo htmlspecialchars($doctorName); ?></td>
-                            <td><?php echo htmlspecialchars($doctorAvailabilityDate); ?></td>
-                            <td><?php echo htmlspecialchars($doctorSpecialization); ?></td>
-                            <td class="scheduled"><?php echo htmlspecialchars($doctorAvailability); ?></td>
-                            <td>
-                                    <a href="editDoctor.php" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
-                                    </a>
-                                    <a href="deleteDoctor.php" class="icon-link">
-                                        <i class="ri-delete-bin-line delete" title="Delete"></i>
-                                    </a>
-                            </td>
-                        </tr>
-                            <?php }} ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<?php
+$viewDoctorQuery = "SELECT * FROM doctors ORDER BY doctorId DESC";
+$viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
+
+if ($viewDoctorResult && mysqli_num_rows($viewDoctorResult) > 0) {
+    while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) {
+        $doctorId = $doctor['doctorId'];
+        $doctorName = $doctor['doctorName'];
+        $doctorSpecialization = $doctor['doctorSpecialization'];
+        $doctorAvailability = $doctor['doctorAvailability'];
+        $doctorAvailabilityDate = $doctor['doctorAvailabilityDate'];
+        $doctorAvailabilityTime = $doctor['doctorAvailabilityTime'];
+
+        // Format date
+        $formattedDate = "Not Scheduled";
+        if (!empty($doctorAvailabilityDate) && $doctorAvailabilityDate !== '0000-00-00') {
+            $formattedDate = date("d M Y", strtotime($doctorAvailabilityDate));
+        }
+
+        // Format time
+        $formattedTime = "Not Scheduled";
+        if (!empty($doctorAvailabilityTime) && $doctorAvailabilityTime !== '00:00:00') {
+            $formattedTime = date("h:i A", strtotime($doctorAvailabilityTime));
+        }
+
+        $statusClass = strtolower($doctorAvailability) === 'free' ? 'free' : 'scheduled';
+?>
+        <tr>
+            <td><?php echo htmlspecialchars($doctorName); ?></td>
+            <td><?php echo htmlspecialchars($formattedDate); ?></td>
+            <td><?php echo htmlspecialchars($formattedTime); ?></td>
+            <td><?php echo htmlspecialchars($doctorSpecialization); ?></td>
+            <td class="<?php echo $statusClass; ?>"><?php echo htmlspecialchars($doctorAvailability); ?></td>
+            <td>
+                <a href="editDoctor.php?doctorId=<?php echo $doctorId; ?>" class="icon-link">
+                    <i class="ri-edit-line edit" title="Edit"></i>
+                </a>
+                <a href="deleteDoctor.php?doctorId=<?php echo $doctorId; ?>" class="icon-link" onclick="return confirm('Are you sure you want to delete this doctor?');">
+                    <i class="ri-delete-bin-line delete" title="Delete"></i>
+                </a>
+            </td>
+        </tr>
+<?php
+    }
+}
+?>
+
+            </tbody>
+        </table>
+    </div>
+
         </div>
     </section>
 

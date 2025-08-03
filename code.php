@@ -25,14 +25,17 @@ if (isset($_POST['addDoctor'])) {
     $doctorAvailability = $_POST['doctorAvailability'];
     $doctorAvailabilityDate = $_POST['doctorAvailabilityDate'];
     $doctorAvailabilityTime = $_POST['doctorAvailabilityTime'];
+    $doctorCity = $_POST['doctorCity'];
 
-    $addDoctorQuery = "INSERT INTO doctors (
-        doctorName, doctorAge, doctorEmail, doctorGender, doctorPhoneNumber,
-        doctorSpecialization, doctorAvailability, doctorAvailabilityDate, doctorAvailabilityTime
-    ) VALUES (
-        '$doctorName', '$doctorAge', '$doctorEmail', '$doctorGender', '$doctorPhoneNumber',
-        '$doctorSpecialization', '$doctorAvailability', '$doctorAvailabilityDate', '$doctorAvailabilityTime'
-    )";
+   $addDoctorQuery = "INSERT INTO doctors (
+    doctorName, doctorAge, doctorEmail, doctorGender, doctorPhoneNumber,
+    doctorSpecialization, doctorAvailability, doctorAvailabilityDate, doctorAvailabilityTime, doctorCity
+) VALUES (
+    '$doctorName', '$doctorAge', '$doctorEmail', '$doctorGender', '$doctorPhoneNumber',
+    '$doctorSpecialization', '$doctorAvailability', '$doctorAvailabilityDate', '$doctorAvailabilityTime', '$doctorCity'
+)";
+
+
 
     $result = mysqli_query($conn, $addDoctorQuery);
 
@@ -64,9 +67,10 @@ if(isset($Post['editDoctor'])){
   $doctorAvailability = $_POST['doctorAvailability'];
   $doctorAvailabilityDate = $_POST['doctorAvailabilityDate'];
   $doctorAvailabilityTime = $_POST['doctorAvailabilityTime'];
+     $doctorCity = $_POST['doctorCity'];
 
 
-mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorSpecialization='$doctorSpecialization' , doctorAvailability='$doctorAvailability' , doctorAvailabilityDate ='$doctorAvailabilityDate' , doctorAvailabilityTime = '$doctorAvailabilityTime'   WHERE doctorId=$id");
+mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorSpecialization='$doctorSpecialization' , doctorAvailability='$doctorAvailability' , doctorAvailabilityDate ='$doctorAvailabilityDate' , doctorAvailabilityTime = '$doctorAvailabilityTime'  , doctorCity='$doctorCity' WHERE doctorId=$id");
 }
 
 //Delete Doctor Details

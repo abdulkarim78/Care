@@ -6,7 +6,7 @@
     <title>Add Doctors</title>
 
     <!-- External stylesheet for styling -->
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>

@@ -10,7 +10,7 @@
     <title>Patient - ClyraMed</title>
 
     <!-- Main CSS file for dashboard layout and component styling -->
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Remix Icon CDN for UI icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />

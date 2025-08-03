@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Doctors</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -31,10 +31,11 @@
                             <input type="text" id="doctorName" name="doctorName" placeholder="Enter full name" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="doctorAge">Age:</label>
-                            <input type="number" id="doctorAge" name="doctorAge" placeholder="Enter age" required>
-                        </div>
+                       <div class="form-group">
+                <label for="doctorAge">Age (Must be above 26):</label>
+                <input type="number" id="doctorAge" name="doctorAge" placeholder="Enter age" min="27" required>
+</div>
+
 
                         <div class="form-group">
                             <label for="doctorEmail">Email Address:</label>
@@ -50,6 +51,10 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
+                             <div class="form-group">
+                <label for="doctorCity">City:</label>
+                <input type="text" id="doctorCity" name="doctorCity" placeholder="Enter city" required>
+            </div>
 
                         <div class="form-group">
                             <label for="doctorPhoneNumber">Phone Number:</label>

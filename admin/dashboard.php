@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Main CSS for dashboard -->
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Remix Icon CDN -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <title>Dashboard</title>
@@ -102,12 +102,8 @@
             </a>
         </div>
     </div>
-
     <div class="doctors--cards" id="doctorCards">
-        <?php
-    
-
-        while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
+        <?php while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
             <a href="#" class="doctor--card" data-status="<?= htmlspecialchars($doctor['doctorAvailability']) ?>">
                 <div class="img--box--cover">
                     <div class="img--box">
@@ -115,6 +111,9 @@
                     </div>
                 </div>
                 <h3><?= htmlspecialchars($doctor['doctorName']) ?></h3>
+
+                <!-- City -->
+                <p><strong>City:</strong> <?= htmlspecialchars($doctor['doctorCity']) ?></p>
 
                 <!-- Availability Date -->
                 <p><strong>Date:</strong>
@@ -133,7 +132,6 @@
         <?php } ?>
     </div>
 </div>
-            
 
             <!-- ===== Recent Patients Section ===== -->
             <div class="recents-patients">

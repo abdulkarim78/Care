@@ -20,10 +20,10 @@
                 <button><i class="ri-search-2-line"></i></button>
             </div>
 
-            <div class="notification--profile">
-                <div class="picon lock"><i class="ri-lock-line"></i></div>
-                <div class="picon bell"><i class="ri-notification-2-line"></i></div>
-                <div class="picon chat"><i class="ri-wechat-2-line"></i></div>
+            <div class="notification--profile"><div class="picon lock">
+    <a href="/Care/login.php"><i class="ri-lock-line"></i></a></div>
+                <div class="picon bell"> <a href="/Care/index.php#contact"><i class="ri-notification-2-line"></i></a></div>
+                <div class="picon chat"> <a href="/Care/index.php"><i class="ri-wechat-2-line"></i></a></div>
                 <div class="picon profile">
                     <img src="../assets/profile.jpg" alt="Profile Picture">
                 </div>
