@@ -49,7 +49,6 @@ if (isset($_POST['addDoctor'])) {
 //view doctor details
 $viewDoctorQuery = "SELECT * FROM doctors";
 $viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
-
 // Error check
 if (!$viewDoctorResult) {
     die("Query failed: " . mysqli_error($conn));
@@ -58,33 +57,33 @@ if (!$viewDoctorResult) {
 
 // Edit Doctor Details
 if(isset($_POST['editDoctor'])){
-  $doctorId = $_POST['doctorId'];
-  $doctorName = $_POST['doctorName'];
-  $doctorAge = $_POST['doctorAge'];
-  $doctorEmail = $_POST['doctorEmail'];
-  $doctorGender = $_POST['doctorGender'];
-  $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
-  $doctorSpecialization = $_POST['doctorSpecialization'];
-  $doctorAvailability = $_POST['doctorAvailability'];
-  $doctorAvailabilityDate = $_POST['doctorAvailabilityDate'];
-  $doctorAvailabilityTime = $_POST['doctorAvailabilityTime'];
-     $doctorCity = $_POST['doctorCity'];
+    $doctorId = $_POST['doctorId'];
+    $doctorName = $_POST['doctorName'];
+    $doctorAge = $_POST['doctorAge'];
+    $doctorEmail = $_POST['doctorEmail'];
+    $doctorGender = $_POST['doctorGender'];
+    $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
+    $doctorSpecialization = $_POST['doctorSpecialization'];
+    $doctorAvailability = $_POST['doctorAvailability'];
+    $doctorAvailabilityDate = $_POST['doctorAvailabilityDate'];
+    $doctorAvailabilityTime = $_POST['doctorAvailabilityTime'];
+    $doctorCity = $_POST['doctorCity'];
 
 
-$result =  mysqli_query($conn, "UPDATE doctors SET 
-doctorName='$doctorName', 
-doctorAge='$doctorAge' , 
-doctorEmail='$doctorEmail' , 
-doctorGender='$doctorGender' , 
-doctorPhoneNumber='$doctorPhoneNumber' , 
-doctorSpecialization='$doctorSpecialization' , 
-doctorAvailability='$doctorAvailability' , 
-doctorAvailabilityDate ='$doctorAvailabilityDate' , 
-doctorAvailabilityTime = '$doctorAvailabilityTime'  , 
-doctorCity='$doctorCity' WHERE 
-doctorId=$doctorId");
+    $result =  mysqli_query($conn, "UPDATE doctors SET  
+        doctorName='$doctorName', 
+        doctorAge='$doctorAge' , 
+        doctorEmail='$doctorEmail' , 
+        doctorGender='$doctorGender' , 
+        doctorPhoneNumber='$doctorPhoneNumber' , 
+        doctorSpecialization='$doctorSpecialization' , 
+        doctorAvailability='$doctorAvailability' , 
+        doctorAvailabilityDate ='$doctorAvailabilityDate' , 
+        doctorAvailabilityTime = '$doctorAvailabilityTime'  , 
+        doctorCity='$doctorCity' WHERE 
+        doctorId=$doctorId");
 
-if ($result) {
+    if ($result) {
         echo "<script>
         alert('Doctor Updated Successfully!');
         window.location.href='doctor.php';
