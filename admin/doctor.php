@@ -1,4 +1,6 @@
-<?php include('../code.php'); ?>
+<?php include('../code.php');
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +73,7 @@
     </div>
 </div>
 
-            <!-- ===== Recent Doctors Table ===== -->
+<!-- ===== Recent Doctors Table ===== -->
             <div class="recents-doctors">
     <div class="title">
         <h2 class="section--title">Recent Doctors</h2>
@@ -96,35 +98,42 @@ $viewDoctorResult = mysqli_query($conn, $viewDoctorQuery);
 
 if ($viewDoctorResult && mysqli_num_rows($viewDoctorResult) > 0) {
     while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) {
-        $doctorId = $doctor['doctorId'];
-        $doctorName = $doctor['doctorName'];
-        $doctorSpecialization = $doctor['doctorSpecialization'];
-        $doctorAvailability = $doctor['doctorAvailability'];
-        $doctorAvailabilityDate = $doctor['doctorAvailabilityDate'];
-        $doctorAvailabilityTime = $doctor['doctorAvailabilityTime'];
+        $_SESSION['doctorId'] = $doctor['doctorId'];
+        $_SESSION['doctorName'] = $doctor['doctorName'];
+        $_SESSION['doctorAge'] = $doctor['doctorAge'];
+        $_SESSION['doctorEmail'] = $doctor['doctorEmail'];
+        $_SESSION['doctorGender'] = $doctor['doctorGender'];
+        $_SESSION['doctorPhoneNumber'] = $doctor['doctorPhoneNumber'];
+        $_SESSION['doctorSpecialization'] = $doctor['doctorSpecialization'];
+        $_SESSION['doctorAvailability'] = $doctor['doctorAvailability'];
+        $_SESSION['doctorAvailabilityDate'] = $doctor['doctorAvailabilityDate'];
+        $_SESSION['doctorAvailabilityTime'] = $doctor['doctorAvailabilityTime'];
 
         // Format date
         $formattedDate = "Not Scheduled";
-        if (!empty($doctorAvailabilityDate) && $doctorAvailabilityDate !== '0000-00-00') {
-            $formattedDate = date("d M Y", strtotime($doctorAvailabilityDate));
+        if (!empty($_SESSION['doctorAvailabilityDate']) && $_SESSION['doctorAvailabilityDate'] !== '0000-00-00') {
+            $formattedDate = date("d M Y", strtotime($_SESSION['doctorAvailabilityDate']));
         }
 
         // Format time
         $formattedTime = "Not Scheduled";
-        if (!empty($doctorAvailabilityTime) && $doctorAvailabilityTime !== '00:00:00') {
-            $formattedTime = date("h:i A", strtotime($doctorAvailabilityTime));
+        if (!empty($_SESSION['doctorAvailabilityTime']) && $_SESSION['doctorAvailabilityTime'] !== '00:00:00') {
+            $formattedTime = date("h:i A", strtotime($_SESSION['doctorAvailabilityTime']));
         }
-
-        $statusClass = strtolower($doctorAvailability) === 'free' ? 'free' : 'scheduled';
 ?>
         <tr>
-            <td><?php echo htmlspecialchars($doctorName); ?></td>
+            <td><?php echo htmlspecialchars($_SESSION['doctorName']); ?></td>
             <td><?php echo htmlspecialchars($formattedDate); ?></td>
             <td><?php echo htmlspecialchars($formattedTime); ?></td>
-            <td><?php echo htmlspecialchars($doctorSpecialization); ?></td>
-            <td class="<?php echo $statusClass; ?>"><?php echo htmlspecialchars($doctorAvailability); ?></td>
+            <td><?php echo htmlspecialchars($_SESSION['doctorSpecialization']); ?></td>
+            <td><?php  if (!empty(isset($_SESSION['doctorAvailability'])) && $_SESSION['doctorAvailability'] == "Scheduled") {
+                echo '<span class="status scheduled">Scheduled</span>';
+            } else {
+                echo '<span class="status free">Free</span>';
+                    } ?>
+            </td>
             <td>
-                <a href="editDoctor.php" class="icon-link">
+                <a href="editDoctor.php?doctorId=<?php echo $_SESSION['doctorId'];?>" class="icon-link">
                     <i class="ri-edit-line edit" title="Edit"></i>
                 </a>
                 <form action="doctor.php" method="POST" style="display: inline;">

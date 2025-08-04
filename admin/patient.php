@@ -76,10 +76,10 @@
                                 <td><?php echo $patientGender?></td>
                                 <td><?php echo $patientAge?></td>
                                 <td>
-                                    <a href="editPatient.php" class="icon-link">
+                                    <a href="editPatient.php?patientId = <?php echo $patientId ?>" class="icon-link">
                                         <i class="ri-edit-line edit" title="Edit"></i>
                                     </a>
-
+                                    
                                     <form action="patient.php" method="POST" style="display: inline;">
                                         <input type="hidden" name="patientId" value="<?= $patient['patientId'] ?>">
                                         <button type="submit" name="deletePatient" style="background: none; border: none; padding: 0; cursor: pointer; " >
