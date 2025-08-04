@@ -103,6 +103,7 @@ if ($viewDoctorResult && mysqli_num_rows($viewDoctorResult) > 0) {
         $_SESSION['doctorAge'] = $doctor['doctorAge'];
         $_SESSION['doctorEmail'] = $doctor['doctorEmail'];
         $_SESSION['doctorGender'] = $doctor['doctorGender'];
+        $_SESSION['doctorCity'] = $doctor['doctorCity'];
         $_SESSION['doctorPhoneNumber'] = $doctor['doctorPhoneNumber'];
         $_SESSION['doctorSpecialization'] = $doctor['doctorSpecialization'];
         $_SESSION['doctorAvailability'] = $doctor['doctorAvailability'];

@@ -32,7 +32,7 @@ session_start();
 
             <!-- =================== FORM START =================== -->
 <div class="doctor-form-wrapper">
-  <form action="addDoctor.php" method="POST" class="form wide-form">
+  <form action="editDoctor.php" method="POST" class="form wide-form">
     <h2>Edit Doctor Details</h2>
 
     <div class="form-grid">
@@ -55,11 +55,17 @@ session_start();
       <div class="form-group">
         <label>Gender:</label>
                 <select name="doctorGender" class="box" required>
-                    <option value="<?php if ($_SESSION['doctorGender'] == 'Male') echo 'selected'; ?>">Male</option>
-                    <option value="<?php if ($_SESSION['doctorGender'] == 'Female') echo 'selected'; ?>">Female</option>
-                    <option value="<?php if ($_SESSION['doctorGender'] == 'Other') echo 'selected'; ?>">Other</option>
+                    <option value="Male" <?php if ($_SESSION['doctorGender'] == 'Male') echo 'selected'; ?>>Male</option>
+                    <option value="Female" <?php if ($_SESSION['doctorGender'] == 'Female') echo 'selected'; ?>>Female</option>
+                    <option value="Other" <?php if ($_SESSION['doctorGender'] == 'Other') echo 'selected'; ?>>Other</option>
                 </select>
       </div>
+
+
+       <div class="form-group">
+                <label for="doctorCity">City:</label>
+                <input type="text" id="doctorCity" name="doctorCity" value="<?php echo $_SESSION['doctorCity'] ?>" placeholder="Enter city" required>
+        </div>
 
       <div class="form-group">
         <label>Phone Number:</label>
@@ -68,26 +74,26 @@ session_start();
 
        <div class="form-group">
                             <label for="doctorSpecialization">Specialization</label>
-                            <input type="text" id="doctorSpecialization" name="doctorSpecialization" value="<?php $_SESSION['doctorSpecialization']?>" placeholder="Enter Specialization" required>
+                            <input type="text" id="doctorSpecialization" name="doctorSpecialization" value="<?php echo $_SESSION['doctorSpecialization']?>" placeholder="Enter Specialization" required>
                         </div>
       
                     <div class="form-group">
     <label for="doctorAvailability">Availability:</label>
-    <select id="doctorAvailability" name="doctorAvailability" class="box" required>
+    <select id="doctorAvailability" name="doctorAvailability" value="<?php echo $_SESSION['doctorAvailability'] ?>" class="box" required>
         <option value="" disabled selected>Select availability</option>
-        <option value="<?php $_SESSION['doctorAvailability'] == 'Free' ?>">Free</option>
-        <option value="<?php $_SESSION['doctorAvailability'] == 'Scheduled' ?>">Scheduled</option>
+        <option value="Free" <?php echo $_SESSION['doctorAvailability'] == 'Free' ?>>Free</option>
+        <option value="Scheduled" <?php echo $_SESSION['doctorAvailability'] == 'Scheduled' ?>>Scheduled</option>
     </select>
 </div>
 
 <div class="form-group">
     <label for="doctorAvailabilityDate">Available Date:</label>
-    <input type="date" id="doctorAvailabilityDate" name="doctorAvailabilityDate" value="<?php $_SESSION['doctorAvailabilityDate']?>" class="box" required>
+    <input type="date" id="doctorAvailabilityDate" name="doctorAvailabilityDate" value="<?php echo $_SESSION['doctorAvailabilityDate']?>" class="box" required>
 </div>
 
 <div class="form-group">
     <label for="doctorAvailabilityTime">Available Time:</label>
-    <input type="time" id="doctorAvailabilityTime" name="doctorAvailabilityTime" value="<?php $_SESSION['doctorAvailabilityTime']?>" class="box" required>
+    <input type="time" id="doctorAvailabilityTime" name="doctorAvailabilityTime" value="<?php echo $_SESSION['doctorAvailabilityTime']?>" class="box" required>
 </div>
 </div>
                 

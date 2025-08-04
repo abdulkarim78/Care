@@ -51,7 +51,7 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                             <div class="form-group">
+            <div class="form-group">
                 <label for="doctorCity">City:</label>
                 <input type="text" id="doctorCity" name="doctorCity" placeholder="Enter city" required>
             </div>

@@ -57,7 +57,8 @@ if (!$viewDoctorResult) {
 }
 
 // Edit Doctor Details
-if(isset($Post['editDoctor'])){
+if(isset($_POST['editDoctor'])){
+  $doctorId = $_POST['doctorId'];
   $doctorName = $_POST['doctorName'];
   $doctorAge = $_POST['doctorAge'];
   $doctorEmail = $_POST['doctorEmail'];
@@ -70,7 +71,28 @@ if(isset($Post['editDoctor'])){
      $doctorCity = $_POST['doctorCity'];
 
 
-mysqli_query($conn, "UPDATE doctors SET doctorName='$doctorName', doctorAge='$doctorAge' , doctorEmail='$doctorEmail' , doctorGender='$doctorGender' , doctorPhoneNumber='$doctorPhoneNumber' , doctorSpecialization='$doctorSpecialization' , doctorAvailability='$doctorAvailability' , doctorAvailabilityDate ='$doctorAvailabilityDate' , doctorAvailabilityTime = '$doctorAvailabilityTime'  , doctorCity='$doctorCity' WHERE doctorId=$id");
+$result =  mysqli_query($conn, "UPDATE doctors SET 
+doctorName='$doctorName', 
+doctorAge='$doctorAge' , 
+doctorEmail='$doctorEmail' , 
+doctorGender='$doctorGender' , 
+doctorPhoneNumber='$doctorPhoneNumber' , 
+doctorSpecialization='$doctorSpecialization' , 
+doctorAvailability='$doctorAvailability' , 
+doctorAvailabilityDate ='$doctorAvailabilityDate' , 
+doctorAvailabilityTime = '$doctorAvailabilityTime'  , 
+doctorCity='$doctorCity' WHERE 
+doctorId=$doctorId");
+
+if ($result) {
+        echo "<script>
+        alert('Doctor Updated Successfully!');
+        window.location.href='doctor.php';
+        </script>";
+    } else {
+        echo "Update Error: " . mysqli_error($conn);
+    }
+
 }
 
 //Delete Doctor Details
