@@ -1,5 +1,6 @@
 <?php 
     include('../code.php');
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,20 +64,22 @@
                             if(mysqli_num_rows($viewPatientResult) > 0) {
                                 // Loop through each patient record
                                 while($patient = mysqli_fetch_assoc($viewPatientResult)) {
-                                    $patientId = $patient['patientId'];
-                                    $patientName = $patient['patientName'];
-                                    $patientGender = $patient['patientGender'];
-                                    $patientAge = $patient['patientAge'];
-                                    $patientDateIn = $patient['patientDateIn'];
+                                    $_SESSION['patientId'] = $patient['patientId'];
+                                    $_SESSION['patientName'] = $patient['patientName'];
+                                    $_SESSION['patientEmail'] = $patient['patientEmail'];
+                                    $_SESSION['patientPhone'] = $patient['patientPhone'];
+                                    $_SESSION['patientGender'] = $patient['patientGender'];
+                                    $_SESSION['patientAge'] = $patient['patientAge'];
+                                    $_SESSION['patientDateIn'] = $patient['patientDateIn'];
                             ?>
                             <!-- ===== Example Patient Row 1 ===== -->
                             <tr>
-                                <td><?php echo $patientName?></td>
-                                <td><?php echo date("d-m-Y", strtotime($patientDateIn)); ?></td>
-                                <td><?php echo $patientGender?></td>
-                                <td><?php echo $patientAge?></td>
+                                <td><?php echo $_SESSION['patientName']?></td>
+                                <td><?php echo date("d-m-Y", strtotime($_SESSION['patientDateIn'])); ?></td>
+                                <td><?php echo $_SESSION['patientGender']?></td>
+                                <td><?php echo $_SESSION['patientAge']?></td>
                                 <td>
-                                    <a href="editPatient.php?patientId = <?php echo $patientId ?>" class="icon-link">
+                                    <a href="editPatient.php?patientId=<?php echo $_SESSION['patientId'] ?>" class="icon-link">
                                         <i class="ri-edit-line edit" title="Edit"></i>
                                     </a>
                                     

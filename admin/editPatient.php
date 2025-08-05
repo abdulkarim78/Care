@@ -1,9 +1,11 @@
-<?php include('../code.php'); ?>
+<?php include('../code.php'); 
+      session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Patients</title>
+    <title>Edit Patients</title>
     <!-- External stylesheet for styling -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,45 +27,46 @@
             
             <!-- Section title -->
             <div class="title">
-              <center><h2 class="section--title">Register New Patients</h2></center>
+              <center><h2 class="section--title">Edit Existing Patients</h2></center>
 
             </div>
 
             <!-- =================== FORM START =================== -->
              <div class="doctor-form-wrapper">
-  <form action="addPatient.php" method="POST" class="form wide-form">
-    <h2>Add Patient</h2>
+  <form action="editPatient.php" method="POST" class="form wide-form">
+    <h2>Edit Patient</h2>
 
     <div class="form-grid">
       <div class="form-group">
         <label>Patient Name:</label>
-        <input type="text" name="patientName" placeholder="Enter full name" required>
+        <input type="hidden" name="patientId" value="<?php echo $patientId ?>">
+        <input type="text" name="patientName" value="<?php echo $_SESSION['patientName'] ?>" placeholder="Enter full name" required>
       </div>
 
       <div class="form-group">
           <label>Age:</label>
-          <input type="number" name="patientAge" placeholder="Enter age" required>
+          <input type="number" name="patientAge" value="<?php echo $_SESSION['patientAge']; ?>" placeholder="Enter age" required>
         </div>
 
       <div class="form-group">
         <label>Email Address:</label>
-        <input type="email" name="patientEmail" placeholder="Enter email" required>
+        <input type="email" name="patientEmail" value="<?php echo $_SESSION['patientEmail']; ?>" placeholder="Enter email" required>
       </div>
 
       <div class="form-group">
         <label>Phone Number:</label>
-        <input type="tel" name="patientPhone" placeholder="Enter phone" required>
+        <input type="tel" name="patientPhone" value="<?php echo $_SESSION['patientPhone']; ?>" placeholder="Enter phone" required>
       </div>
 
       <div class="form-group">
         <label>Gender:</label>
                 <select name="patientGender" class="box" required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                    <option value="Male" <?php if ($_SESSION['patientGender'] == 'Male') echo 'selected';?>>Male</option>
+                    <option value="Female" <?php if ($_SESSION['patientGender'] == 'Female') echo 'selected';?>>Female</option>
+                    <option value="Other" <?php if ($_SESSION['patientGender'] == 'Other') echo 'selected';?>>Other</option>
                 </select>
-                </div>
-                </div>
+      </div>
+   </div>
                 
 
                 <!-- Submit Button -->

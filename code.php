@@ -132,16 +132,17 @@ if(isset($_POST['addPatient'])){
 
 // Edit Patient Details
 if(isset($_POST['editPatient'])){
+    $patientId = $_POST['patientId'];
     $patientName = $_POST['patientName'];
     $patientAge = $_POST['patientAge'];
     $patientEmail = $_POST['patientEmail'];
     $patientPhone = $_POST['patientPhone'];
     $patientGender = $_POST['patientGender'];
 
-    $editPatientQuery = "UPDATE patients SET patientName ='$patientName', patientAge = '$patientAge', patientEmail ='$patientEmail', patientPhone ='$patientPhone', patientGender ='$patientGender' WHERE patientId = $id";
+    $editPatientQuery = "UPDATE patients SET patientName ='$patientName', patientAge = '$patientAge', patientEmail ='$patientEmail', patientPhone ='$patientPhone', patientGender ='$patientGender' WHERE patientId = '$patientId'";
     $result = mysqli_query($conn, $editPatientQuery);
     if($result){
-      header('location:admin/dashboard.php');
+      header('location:patient.php');
     }
 }
 
