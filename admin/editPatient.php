@@ -1,5 +1,17 @@
 <?php include('../code.php'); 
       session_start();
+      $patientId = isset($_GET['patientId']) ? $_GET['patientId'] : null;
+
+// Fetch patient data from database
+    if($patientId) {
+      $query = "SELECT * FROM patients WHERE patientId = ?";
+      $result = mysqli_prepare($conn, $query);
+    } else {
+    // Redirect if no ID provided
+    header('location: patient.php');
+    exit();
+}
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">

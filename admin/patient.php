@@ -74,13 +74,13 @@
                             ?>
                             <!-- ===== Example Patient Row 1 ===== -->
                             <tr>
-                                <td><?php echo $_SESSION['patientName']?></td>
-                                <td><?php echo date("d-m-Y", strtotime($_SESSION['patientDateIn'])); ?></td>
-                                <td><?php echo $_SESSION['patientGender']?></td>
-                                <td><?php echo $_SESSION['patientAge']?></td>
+                                <td><?php echo htmlspecialchars($patient['patientName']) ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($patient['patientDateIn'])); ?></td>
+                                <td><?php echo htmlspecialchars($patient['patientGender']) ?></td>
+                                <td><?php echo htmlspecialchars($patient['patientAge']) ?></td>
                                 <td>
-                                    <a href="editPatient.php?patientId=<?php echo $_SESSION['patientId'] ?>" class="icon-link">
-                                        <i class="ri-edit-line edit" title="Edit"></i>
+                                    <a href="editPatient.php?patientId=<?php echo $patient['patientId'] ?>" class="icon-link">
+                                     <i class="ri-edit-line edit" title="Edit"></i>
                                     </a>
                                     
                                     <form action="patient.php" method="POST" style="display: inline;">
