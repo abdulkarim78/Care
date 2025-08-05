@@ -70,7 +70,7 @@
                 
 
                 <!-- Submit Button -->
-    <button type="submit" name="editPatient" class="submit-btn">Edit Patient</button>
+    <button type="submit" class="submit-btn"  name="editPatient">Edit Patient</button>
             </form>
             </div>
             <!-- =================== FORM END =================== -->
