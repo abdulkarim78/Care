@@ -100,35 +100,8 @@ section{
 .header .logo span{
     color: var(--blue);
 }
-.nav-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 0;
-}
 
-/* Navigation links */
-.nav {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-}
 
-.nav a {
-  color: #333;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.nav a:hover {
-  color: #007bff;
-}
-
-/* Login/Logout button */
-.auth-btn {
-  margin-left: auto;
-}
 .header .nav a{
     margin: 0 1rem;
     font-size: 1.7rem;

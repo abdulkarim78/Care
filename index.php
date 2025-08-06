@@ -1,3 +1,5 @@
+<?php include('code.php'); 
+?>
 <?php
 session_start();
 $isLoggedIn = isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true;
@@ -38,7 +40,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
 
     <!---------Custom css link------>
-    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
 
 </head>
 
@@ -47,8 +49,11 @@ if (isset($_POST['submit'])) {
 <header class="header fixed-top">
     <div class="container">
         <div class="row align-items-center justify-content-between">
+            
+            <!-- Logo -->
             <a href="#home" class="logo">Clyra<span>Med</span></a>
 
+            <!-- Navigation links -->
             <nav class="nav">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
@@ -57,18 +62,22 @@ if (isset($_POST['submit'])) {
                 <a href="#contact">Contact</a>
             </nav>
 
-            <!-- Button that changes based on login -->
-  <?php if ($isLoggedIn): ?>
-    <a href="#contact" class="link-btn">make a appointment</a>
-<?php else: ?>
-    <a href="login.php" class="link-btn">Login</a>
-<?php endif; ?>
+                <!-- Login/Logout button inside nav -->
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="logout.php" class="link-btn">Logout</a>
+                <?php else: ?>
+                    <a href="login.php" class="link-btn">Login</a>
+                <?php endif; ?>
+            </nav>
 
+            <!-- Mobile menu icon -->
             <div id="menu-btn" class="fas fa-bars"></div>
+
         </div>
     </div>
 </header>
 <!-- Header section ends -->
+
 
 
 
@@ -82,13 +91,8 @@ if (isset($_POST['submit'])) {
                     ClyraMed bridges the gap between patients and doctors with effortless scheduling, secure
                     profiles, and a seamless healthcare journey.
                 </p>
+<a href="#contact" class="link-btn">Make an Appointment</a>
 
-   <?php if ($isLoggedIn): ?>
-    <a href="#contact" class="link-btn">Make an Appointment</a>
-
-<?php else: ?>
-    <a href="login.php" class="link-btn">Login</a>
-<?php endif; ?>
             </div>
         </div>
     </div>
@@ -252,35 +256,48 @@ if (isset($_POST['submit'])) {
 
     <!---------reviews section ends-->
 
-    <!--contact section starts ------->
+   
+
+<!-- ===== Doctors section ===== -->
     <section class="contact" id="contact">
-        <h1 class="heading">Make Appointment</h1>
+<div class="doctors">
+    <div class="title">
+ <h2 class="section--title">Doctors Available</h2>        <div class="doctors--right--btns">
+           
+        </div>
+    </div>
+    <div class="doctors--cards" id="doctorCards">
+        <?php while ($doctor = mysqli_fetch_assoc($viewDoctorResult)) { ?>
+    <div class="doctor--card" data-status="<?= htmlspecialchars($doctor['doctorAvailability']) ?>">
+        <div class="img--box--cover">
+            <div class="img--box">
+                <img src="./assets/doctor.png" alt="Doctor Image" />
+            </div>
+        </div>
+        <h3><?= htmlspecialchars($doctor['doctorName']) ?></h3>
 
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <?php
-            if (isset($message)) {
-                foreach ($message as $msg) {
-                    echo '<p class="message">' . $msg . '</p>';
-                }
-            }
-            ?>
+        <p><strong>City:</strong> <?= htmlspecialchars($doctor['doctorCity'] ?? 'N/A') ?></p>
 
+        <p><strong>Date:</strong>
+            <?= (!empty($doctor['doctorAvailabilityDate']) && $doctor['doctorAvailabilityDate'] !== '0000-00-00')
+                ? date('d M Y', strtotime($doctor['doctorAvailabilityDate']))
+                : 'N/A' ?>
+        </p>
 
-            <span>Your name:</span>
-            <input type="text" name="name" placeholder="Enter your name" class="box">
-            <span>Your EmailAddress:</span>
-            <input type="email" name="email" placeholder="Enter your email" class="box" required>
-            <span>Your number:</span>
-            <input type="number" name="number" placeholder="Enter your number" class="box" required>
-            <span>Appointment date:</span>
-            <input type="datetime-local" name="date" class="box">
-            <input type="submit" value="make appointment" name="submit" class="link-btn">
+        <p><strong>Time:</strong>
+            <?= (!empty($doctor['doctorAvailabilityTime']) && $doctor['doctorAvailabilityTime'] !== '00:00:00')
+                ? date('h:i A', strtotime($doctor['doctorAvailabilityTime']))
+                : 'N/A' ?>
+        </p>
 
-        </form>
+        <a href="appointment.php" class="btn">Book Now</a>
+    </div>
+<?php } ?>
 
+    </div>
+    
+</div>
     </section>
-
-
 
     <!-------------contact section ends here-->
 

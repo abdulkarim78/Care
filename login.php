@@ -1,25 +1,41 @@
 <?php
-
-
 session_start();
-$_SESSION['isLoggedIn'] = true;
-$message = [];
+include 'code.php';
 
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $email_or_name = trim($_POST['email']);
+  $password = trim($_POST['password']);
+  $role = $_POST['role'];
 
-    // ✅ Replace with your actual DB connection and user verification
-    // For now, we use a dummy check
-    if ($email === "test@example.com" && $password === "123456") {
-        $_SESSION['isLoggedIn'] = true;
-        $_SESSION['user_email'] = $email;
-        header("Location: index.php");
-        exit();
-    } else {
-        $message[] = "Invalid login credentials!";
-    }
+  // Try to match either email or username
+  $sql = "SELECT * FROM users WHERE (email = ? OR name = ?) AND role = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("sss", $email_or_name, $email_or_name, $role);
+  $stmt->execute();
+  $res = $stmt->get_result();
+  if ($res->num_rows === 1) {
+    $user = $res->fetch_assoc();
+    if (password_verify($password, $user['password'])) {
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['role'] = $user['role'];
+      $_SESSION['name'] = $user['name'];
+if ($user['role'] === 'admin') {
+    header("Location: admin/dashboard.php"); // ✅ Correct spelling
+
+} elseif ($user['role'] === 'doctor') {
+    header("Location: doctor/dashboard.php");
+} elseif ($user['role'] === 'patient') {
+    header("Location: index.php");
 }
+    }
+      exit;
+    } else {
+      $error = "Invalid password.";
+    }
+  } else {
+    $error = "User not found.";
+  }
+
 ?>
 
 
@@ -37,22 +53,21 @@ if (isset($_POST['login'])) {
 
     <!--------bootstrap cdn link-------->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!---------Custom css link------>
     <link rel="stylesheet" href="./assets/css/index.css">
 
 </head>
 <body>
-<!--heaader section start-------->
-
-   
-<header class="header fixed-top">
-  <div class="container">
-    <div class="row align-items-center justify-content-between">
-      <a href="#home" class="logo">Clyra<span>Med</span></a>
-</div>
-</div>
-</header>
+    <header class="header fixed-top">
+    <div class="container">
+     <div class="row align-items-center justify-content-between">
+            <a href="#home" class="logo">Clyra<span>Med</span></a>
+            </div>
+            </div>
+            </header>
 
 
 
@@ -74,46 +89,27 @@ if (isset($_POST['login'])) {
         <span>Your Password:</span>
         <input type="password" name="password" placeholder="Enter your password" class="box" required>
 
+        
+    <span>Select Role:</span>
+<select id="role" name="role" class="box" required>
+  <option value="" disabled selected>Select role</option>
+  <option value="admin">Admin</option>
+  <option value="doctor">Doctor</option>
+  <option value="patient">Patient</option>
+</select>
+
         <input type="submit" value="Login" name="login" class="link-btn">
 
-        <p style="margin-top: 10px;">Don't have an account? 
-            <a href="signup.php" style="color: #4e9cff; text-decoration: underline;">Sign up here</a>
-        </p>
+    <p style="margin-top: 10px;">
+      Don't have an account? 
+      <a href="signup.php" style="color: #4e9cff; text-decoration: underline;">Sign up here</a> <br>
+      <a href="parent/parent_register.php">Register as Parent</a> |
+      <a href="hospital/hospital_register.php">Register as Hospital</a>
+    </p>
     </form>
 </section>
 
-   <!-------------footer section starts---------->
-<section class="footer">
-    <div class="box-container container">
-        <div class="box">
-            <i class="fas fa-phone"></i>
-            <h3>Phone Number</h3>
-            <p>+123-456-76890</p>
-            <p>+111-456-7890</p>
-        </div>
 
-        <div class="box">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>Your Address</h3>
-            <p>Karachi, Pakistan - 12039</p>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-clock"></i>
-            <h3>Opening Hours</h3>
-            <p>24/7 Hours Daily</p>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-envelope"></i>
-            <h3>Email Address</h3>
-            <p>ClyraMed@gmail.com</p>
-            <p>healthcentre@gmail.com</p>
-        </div>
-    </div>
-    <p class="credit">&copy; copyright <?php echo date('Y'); ?> by <span>Clyra Med</span></p>
-</section>
-<!-------------footer section ends---------->
 
     <!----------script custo link ---- -->
     <script src="./assets/js/script.js"></script>

@@ -26,3 +26,16 @@ window.onscroll = () => {
 
 
 }
+function filterDoctors(status) {
+    const cards = document.querySelectorAll('.doctor--card');
+
+    cards.forEach(card => {
+        const cardStatus = card.getAttribute('data-status');
+
+        if (status === "" || cardStatus.toLowerCase() === status.toLowerCase()) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
