@@ -1,11 +1,22 @@
 <?php include('../code.php');
 session_start();
+$doctorId = isset($_GET['doctorId']) ? $_GET['doctorId'] : null;
+
+// Fetch patient data from database
+    if($doctorId) {
+      $query = "SELECT * FROM doctors WHERE doctorId = ?";
+      $result = mysqli_prepare($conn, $query);
+    } else {
+    // Redirect if no ID provided
+    header('location: doctor.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Doctors</title>
+    <title>Edit Doctors</title>
 
     <!-- External stylesheet for styling -->
     <link rel="stylesheet" href="style.css">
@@ -33,12 +44,12 @@ session_start();
             <!-- =================== FORM START =================== -->
 <div class="doctor-form-wrapper">
   <form action="editDoctor.php" method="POST" class="form wide-form">
-    <h2>Edit Doctor Details</h2>
+    <h2>Edit Existing Doctor</h2>
 
     <div class="form-grid">
       <div class="form-group">
         <label>Doctor Name:</label>
-        <input type="hidden" name="doctorId" value="<?php echo $_SESSION['doctorId'];  ?>">
+        <input type="hidden" name="doctorId" value="<?php echo $doctorId  ?>">
         <input type="text" name="doctorName" value="<?php echo $_SESSION['doctorName'];?>" placeholder="Enter full name" required>
       </div>
 

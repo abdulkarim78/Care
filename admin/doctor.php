@@ -134,11 +134,11 @@ if ($viewDoctorResult && mysqli_num_rows($viewDoctorResult) > 0) {
                     } ?>
             </td>
             <td>
-                <a href="editDoctor.php?doctorId=<?php echo $_SESSION['doctorId'];?>" class="icon-link">
+                <a href="editDoctor.php?doctorId=<?php echo $doctor['doctorId'];?>" class="icon-link">
                     <i class="ri-edit-line edit" title="Edit"></i>
                 </a>
                 <form action="doctor.php" method="POST" style="display: inline;">
-                        <input type="hidden" name="doctorId" value="<?= $doctorId ?>">
+                        <input type="hidden" name="doctorId" value="<?= $doctor['doctorId']; ?>">
                         <button type="submit" name="deleteDoctor" style="background: none; border: none; padding: 0; cursor: pointer; " >
                             <i class="ri-delete-bin-line delete" title="Delete"></i>
                         </button>
